@@ -21,6 +21,7 @@
 <nav class="nav-bar">
     <div class="nav-inner">
         <a href="#tools" class="nav-link active">Tools</a>
+        <a href="#characters" class="nav-link">Characters</a>
         <a href="#movepacks" class="nav-link">Move Packs</a>
         <a href="#about" class="nav-link">About</a>
     </div>
@@ -29,94 +30,17 @@
 <main>
     <section id="tools" class="section">
         <h2 class="section-title">Modding Tools</h2>
-        <div class="grid">
+        <div id="tools-grid" class="grid"></div>
+    </section>
 
-            <div class="card">
-                <div class="card-badge">v0.2.8</div>
-                <div class="card-icon">&#128190;</div>
-                <h3>SVR 2010 Save Editor</h3>
-                <p>Edit your SVR 2010 save files. Customize entrances, create superstar templates (Taker, Rock, Stone Cold), and more.</p>
-                <ul class="features">
-                    <li>Entrance editing</li>
-                    <li>Superstar templates</li>
-                    <li>Python &amp; HTML versions</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Download</a>
-            </div>
-
-            <div class="card">
-                <div class="card-badge">v8.1</div>
-                <div class="card-icon">&#127916;</div>
-                <h3>SVR Anim Editor X</h3>
-                <p>The ultimate animation editor for SVR. WAZE editor, import/export, sound &amp; damage editing, flag editor, and more.</p>
-                <ul class="features">
-                    <li>WAZE editor</li>
-                    <li>Sound &amp; damage editing</li>
-                    <li>New slot creation</li>
-                    <li>ID finder &amp; flag editor</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Download</a>
-            </div>
-
-            <div class="card">
-                <div class="card-badge">v1.0.7</div>
-                <div class="card-icon">&#127912;</div>
-                <h3>SVR TexSwap</h3>
-                <p>Two-pane texture swap tool with atlas merge and PNG import/export support.</p>
-                <ul class="features">
-                    <li>Two-pane texture swap</li>
-                    <li>Atlas merge</li>
-                    <li>PNG import/export</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Download</a>
-            </div>
-
-            <div class="card">
-                <div class="card-badge">v1.5.0</div>
-                <div class="card-icon">&#128295;</div>
-                <h3>SVR Part Transplanter</h3>
-                <p>Port parts between characters with full texture, bone, and physics handling.</p>
-                <ul class="features">
-                    <li>Part porting</li>
-                    <li>Texture handling</li>
-                    <li>Bone &amp; physics support</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Download</a>
-            </div>
-
-            <div class="card">
-                <div class="card-badge">v1.0.0</div>
-                <div class="card-icon">&#128260;</div>
-                <h3>Save Converter</h3>
-                <p>Convert save files between different formats for SVR games.</p>
-                <ul class="features">
-                    <li>Format conversion</li>
-                    <li>Easy to use</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Download</a>
-            </div>
-
-        </div>
+    <section id="characters" class="section">
+        <h2 class="section-title">Custom Characters</h2>
+        <div id="characters-grid" class="grid"></div>
     </section>
 
     <section id="movepacks" class="section">
         <h2 class="section-title">Move Packs</h2>
-        <div class="grid">
-
-            <div class="card card-featured">
-                <div class="card-badge badge-hot">v23</div>
-                <div class="card-icon">&#128165;</div>
-                <h3>SVR 2011 Move Pack</h3>
-                <p>170+ moves from SVR 2010 ported into SVR 2011. Strict vanilla size limits respected.</p>
-                <ul class="features">
-                    <li>170+ moves</li>
-                    <li>2010 &rarr; 2011 port</li>
-                    <li>Vanilla-safe sizes</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Download</a>
-            </div>
-
-        </div>
+        <div id="movepacks-grid" class="grid"></div>
     </section>
 
     <section id="about" class="section">
@@ -126,6 +50,7 @@
             <div class="social-links">
                 <a href="#" class="social-btn">Discord</a>
                 <a href="https://github.com/ps2eater" class="social-btn">GitHub</a>
+                <a href="https://amheroher.itch.io" class="social-btn">itch.io</a>
             </div>
         </div>
     </section>
@@ -134,6 +59,64 @@
 <footer>
     <p>&copy; 2026 PS2EATER. All rights reserved.</p>
 </footer>
+
+<script>
+function createCard(item, type) {
+    const isFree = !item.price || item.price === 'free' || item.price === '$0';
+    const isPaid = !isFree;
+    const cardClass = type === 'movepacks' ? 'card card-featured' : (isPaid ? 'card card-paid' : 'card');
+    const badgeClass = type === 'movepacks' ? 'card-badge badge-hot' : (isPaid ? 'card-badge badge-paid' : 'card-badge');
+    const btnText = isFree ? 'Download' : `Buy ${item.price}`;
+    const btnClass = isPaid ? 'btn btn-buy' : 'btn btn-primary';
+    const link = item.link || '#';
+
+    let imageHtml = '';
+    if (item.image) {
+        imageHtml = `<img src="${item.image}" alt="${item.name}" class="card-image">`;
+    }
+
+    return `
+        <div class="${cardClass}">
+            <div class="${badgeClass}">${item.version}</div>
+            ${imageHtml || `<div class="card-icon">${item.icon || ''}</div>`}
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <ul class="features">
+                ${(item.features || []).map(f => `<li>${f}</li>`).join('')}
+            </ul>
+            ${isPaid ? `<div class="price-tag">${item.price}</div>` : ''}
+            <a href="${link}" class="${btnClass}" ${link !== '#' ? 'target="_blank"' : ''}>${btnText}</a>
+        </div>
+    `;
+}
+
+fetch('data.json')
+    .then(r => r.json())
+    .then(data => {
+        const toolsGrid = document.getElementById('tools-grid');
+        const charsGrid = document.getElementById('characters-grid');
+        const movesGrid = document.getElementById('movepacks-grid');
+
+        if (data.tools && data.tools.length) {
+            toolsGrid.innerHTML = data.tools.map(t => createCard(t, 'tools')).join('');
+        }
+        if (data.characters && data.characters.length) {
+            charsGrid.innerHTML = data.characters.map(c => createCard(c, 'characters')).join('');
+        } else {
+            document.getElementById('characters').style.display = 'none';
+        }
+        if (data.movepacks && data.movepacks.length) {
+            movesGrid.innerHTML = data.movepacks.map(m => createCard(m, 'movepacks')).join('');
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

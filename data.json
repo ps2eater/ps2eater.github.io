@@ -1,0 +1,72 @@
+{
+  "tools": [
+    {
+      "name": "SVR 2010 Save Editor",
+      "version": "v0.2.8",
+      "icon": "💾",
+      "description": "Edit your SVR 2010 save files. Customize entrances, create superstar templates (Taker, Rock, Stone Cold), and more.",
+      "features": ["Entrance editing", "Superstar templates", "Python & HTML versions"],
+      "price": "free",
+      "link": ""
+    },
+    {
+      "name": "SVR Anim Editor X",
+      "version": "v8.1",
+      "icon": "🎬",
+      "description": "The ultimate animation editor for SVR. WAZE editor, import/export, sound & damage editing, flag editor, and more.",
+      "features": ["WAZE editor", "Sound & damage editing", "New slot creation", "ID finder & flag editor"],
+      "price": "free",
+      "link": ""
+    },
+    {
+      "name": "SVR TexSwap",
+      "version": "v1.0.7",
+      "icon": "🎨",
+      "description": "Two-pane texture swap tool with atlas merge and PNG import/export support.",
+      "features": ["Two-pane texture swap", "Atlas merge", "PNG import/export"],
+      "price": "free",
+      "link": ""
+    },
+    {
+      "name": "SVR Part Transplanter",
+      "version": "v1.5.0",
+      "icon": "🔧",
+      "description": "Port parts between characters with full texture, bone, and physics handling.",
+      "features": ["Part porting", "Texture handling", "Bone & physics support"],
+      "price": "free",
+      "link": ""
+    },
+    {
+      "name": "Save Converter",
+      "version": "v1.0.0",
+      "icon": "🔄",
+      "description": "Convert save files between different formats for SVR games.",
+      "features": ["Format conversion", "Easy to use"],
+      "price": "free",
+      "link": ""
+    }
+  ],
+  "movepacks": [
+    {
+      "name": "SVR 2011 Move Pack",
+      "version": "v23",
+      "icon": "💥",
+      "description": "170+ moves from SVR 2010 ported into SVR 2011. Strict vanilla size limits respected.",
+      "features": ["170+ moves", "2010 → 2011 port", "Vanilla-safe sizes"],
+      "price": "free",
+      "link": ""
+    }
+  ],
+  "characters": [
+    {
+      "name": "Sample Character",
+      "version": "v1.0",
+      "icon": "🎭",
+      "image": "",
+      "description": "This is a sample character. Edit data.json to replace or remove this.",
+      "features": ["Custom entrance", "Custom moveset"],
+      "price": "$3.00",
+      "link": ""
+    }
+  ]
+}
