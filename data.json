@@ -46,6 +46,18 @@
       "link": ""
     }
   ],
+  "characters": [
+    {
+      "name": "Royce Keys - 946 SVR MOD 06-11",
+      "version": "v1.0",
+      "icon": "🎭",
+      "description": "Compatible with:\n- WWE SmackDown vs. Raw 2006\n- WWE SmackDown vs. Raw 2007\n- WWE SmackDown vs. Raw 2008\n- WWE SmackDown vs. Raw 2009\n- WWE SmackDown vs. Raw 2010\n- WWE SmackDown vs. Raw 2011",
+      "features": ["Custom character", "Multi-game compatible"],
+      "price": "$15",
+      "link": "https://amheroher.itch.io/royce-keys",
+      "image": "https://img.itch.zone/aW1nLzMxMjEzOTU1LnBuZw==/original/zhcska.png"
+    }
+  ],
   "movepacks": [
     {
       "name": "SVR 2011 Move Pack",
@@ -54,18 +66,6 @@
       "description": "170+ moves from SVR 2010 ported into SVR 2011. Strict vanilla size limits respected.",
       "features": ["170+ moves", "2010 → 2011 port", "Vanilla-safe sizes"],
       "price": "free",
-      "link": ""
-    }
-  ],
-  "characters": [
-    {
-      "name": "Sample Character",
-      "version": "v1.0",
-      "icon": "🎭",
-      "image": "",
-      "description": "This is a sample character. Edit data.json to replace or remove this.",
-      "features": ["Custom entrance", "Custom moveset"],
-      "price": "$3.00",
       "link": ""
     }
   ]
