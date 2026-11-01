@@ -39,93 +39,6 @@
   ],
   "tools": [
     {
-      "id": "svr-2010-save-editor",
-      "name": "SVR 2010 Save Editor",
-      "version": "v0.2.8",
-      "icon": "💾",
-      "description": "Edit your SVR 2010 save files. Customize entrances, create superstar templates (Taker, Rock, Stone Cold), and more.",
-      "features": [
-        "Entrance editing",
-        "Superstar templates",
-        "Python & HTML versions"
-      ],
-      "price": "free",
-      "link": "",
-      "image": "",
-      "featured": false,
-      "hidden": false,
-      "tags": [
-        "Save",
-        "SVR 2010"
-      ],
-      "updated": "2026-10-28"
-    },
-    {
-      "id": "svr-anim-editor-x",
-      "name": "SVR Anim Editor X",
-      "version": "v8.1",
-      "icon": "🎬",
-      "description": "The ultimate animation editor for SVR. WAZE editor, import/export, sound & damage editing, flag editor, and more.",
-      "features": [
-        "WAZE editor",
-        "Sound & damage editing",
-        "New slot creation",
-        "ID finder & flag editor"
-      ],
-      "price": "free",
-      "link": "",
-      "image": "",
-      "featured": true,
-      "hidden": false,
-      "tags": [
-        "Animation",
-        "Flags"
-      ],
-      "updated": "2026-10-28"
-    },
-    {
-      "id": "svr-texswap",
-      "name": "SVR TexSwap",
-      "version": "v1.0.7",
-      "icon": "🎨",
-      "description": "Two-pane texture swap tool with atlas merge and PNG import/export support.",
-      "features": [
-        "Two-pane texture swap",
-        "Atlas merge",
-        "PNG import/export"
-      ],
-      "price": "free",
-      "link": "",
-      "image": "",
-      "featured": false,
-      "hidden": false,
-      "tags": [
-        "Textures"
-      ],
-      "updated": "2026-10-28"
-    },
-    {
-      "id": "svr-part-transplanter",
-      "name": "SVR Part Transplanter",
-      "version": "v1.5.0",
-      "icon": "🔧",
-      "description": "Port parts between characters with full texture, bone, and physics handling.",
-      "features": [
-        "Part porting",
-        "Texture handling",
-        "Bone & physics support"
-      ],
-      "price": "free",
-      "link": "",
-      "image": "",
-      "featured": false,
-      "hidden": false,
-      "tags": [
-        "Modeling"
-      ],
-      "updated": "2026-10-28"
-    },
-    {
       "id": "save-converter",
       "name": "Save Converter",
       "version": "v1.0.0",
@@ -144,27 +57,6 @@
         "Save"
       ],
       "updated": "2026-10-28"
-    },
-    {
-      "id": "roxanne-perez-26",
-      "name": "ROXANNE PEREZ 26",
-      "version": "2",
-      "icon": "🏁",
-      "description": "NO HYBRID SLOTS !\n\nCompatible with:\n\n• WWE SmackDown vs. Raw 2006\n\n• WWE SmackDown vs. Raw 2007\n\n• WWE SmackDown vs. Raw 2008\n\n• WWE SmackDown vs. Raw 2009\n\n• WWE SmackDown vs. Raw 2010\n\n• WWE SmackDown vs. Raw 2011\n\nNO HYBRID SLOTS!",
-      "features": [],
-      "tags": [
-        "wwe",
-        "svr",
-        "ps2",
-        "mods",
-        "divas"
-      ],
-      "price": "free",
-      "link": "https://www.patreon.com/posts/roxanne-perez-26-173591157",
-      "image": "https://c10.patreonusercontent.com/4/patreon-media/p/post/173591157/033499f9a34640c093be46c2bf5ecd85/eyJ3IjoxMDgwfQ%3D%3D/1.png?token-hash=OTStUlVmb64hsFZBtc41UxZI-LM-_4sONGo6bdArNLw%3D&token-time=1794787200",
-      "featured": true,
-      "hidden": false,
-      "updated": "2026-11-01"
     }
   ],
   "characters": [
@@ -184,6 +76,27 @@
       "price": "$15",
       "link": "https://amheroher.itch.io/royce-keys",
       "image": "https://img.itch.zone/aW1nLzMxNjEzOTU1LnBuZw==/original/zhcska.png",
+      "featured": true,
+      "hidden": false,
+      "updated": "2026-11-01"
+    },
+    {
+      "id": "roxanne-perez-26",
+      "name": "ROXANNE PEREZ 26",
+      "version": "2",
+      "icon": "🏁",
+      "description": "NO HYBRID SLOTS !\n\nCompatible with:\n\n• WWE SmackDown vs. Raw 2006\n\n• WWE SmackDown vs. Raw 2007\n\n• WWE SmackDown vs. Raw 2008\n\n• WWE SmackDown vs. Raw 2009\n\n• WWE SmackDown vs. Raw 2010\n\n• WWE SmackDown vs. Raw 2011\n\nNO HYBRID SLOTS!",
+      "features": [],
+      "tags": [
+        "wwe",
+        "svr",
+        "ps2",
+        "mods",
+        "divas"
+      ],
+      "price": "free",
+      "link": "https://www.patreon.com/posts/roxanne-perez-26-173591157",
+      "image": "https://c10.patreonusercontent.com/4/patreon-media/p/post/173591157/033499f9a34640c093be46c2bf5ecd85/eyJ3IjoxMDgwfQ%3D%3D/1.png?token-hash=OTStUlVmb64hsFZBtc41UxZI-LM-_4sONGo6bdArNLw%3D&token-time=1794787200",
       "featured": true,
       "hidden": false,
       "updated": "2026-11-01"
