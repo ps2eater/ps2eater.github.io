@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS2EATER - Control Room</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ============================ LOGIN ============================ -->
+<div class="login" id="login">
+  <div class="login-card">
+    <div class="login-brand">
+      <img src="logo.png" alt="" width="42" height="42">
+      <div>
+        <h1>PS2EATER</h1>
+        <p>Site control room</p>
+      </div>
+    </div>
+
+    <h2>Connect your repository</h2>
+    <p>Use a GitHub token with <b>Contents: read &amp; write</b> for this repository. Everything you save here is committed to the branch that serves <b>ps2eater.github.io</b>.</p>
+
+    <form class="login-form" id="login-form" autocomplete="off">
+      <div class="form-row">
+        <div class="field">
+          <label for="login-owner">Owner</label>
+          <input class="input" id="login-owner" value="ps2eater" spellcheck="false">
+        </div>
+        <div class="field">
+          <label for="login-branch">Branch</label>
+          <input class="input" id="login-branch" value="main" spellcheck="false">
+        </div>
+      </div>
+      <div class="field">
+        <label for="login-repo">Repository</label>
+        <input class="input" id="login-repo" value="ps2eater.github.io" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="login-token">Personal access token</label>
+        <div class="input-affix">
+          <input class="input" id="login-token" type="password" placeholder="github_pat_..." spellcheck="false">
+          <button class="btn-icon" type="button" id="toggle-token" title="Show token" aria-label="Show token">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <span class="hint">GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens.</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="login-remember" checked>
+        <span class="track"></span>
+        <span>Remember on this device</span>
+      </label>
+      <div class="login-actions">
+        <button class="btn btn-primary" type="submit" id="login-connect">Connect</button>
+        <button class="btn" type="button" id="login-offline">Work offline</button>
+      </div>
+      <div class="secure-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <span>The token is kept in <code>localStorage</code> on this device and sent only to <code>api.github.com</code>. Never commit it to the repository or share it.</span>
+      </div>
+      <div class="hint error" id="login-status" hidden></div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================ APP ============================ -->
+<div class="app" id="app" hidden>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <img src="logo.png" alt="" width="32" height="32">
+      <div>
+        <div class="brand-name">PS2EATER</div>
+        <div class="brand-sub" id="brand-sub">Control room</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Main">
+      <div class="nav-section">Dashboard</div>
+      <button class="nav-item active" data-view="overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Overview
+      </button>
+      <button class="nav-item" data-view="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/></svg>
+        History
+      </button>
+
+      <div class="nav-section">Content</div>
+      <button class="nav-item" data-view="tools">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M14.7 6.3a4 4 0 0 0 5 5l-9.4 9.4a2.1 2.1 0 0 1-3-3Z"/><path d="m5 4 3 3"/></svg>
+        <span class="grow">Tools</span><span class="count" id="count-tools">0</span>
+      </button>
+      <button class="nav-item" data-view="characters">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+        <span class="grow">Characters</span><span class="count" id="count-characters">0</span>
+      </button>
+      <button class="nav-item" data-view="movepacks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m13 2-9 12h7l-1 8 9-12h-7Z"/></svg>
+        <span class="grow">Move Packs</span><span class="count" id="count-movepacks">0</span>
+      </button>
+
+      <div class="nav-section">Site</div>
+      <button class="nav-item" data-view="site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg>
+        <span class="grow">Site settings</span>
+      </button>
+      <button class="nav-item" data-view="connection">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 2v6M15 2v6"/><path d="M6 8h12v3a6 6 0 0 1-12 0Z"/><path d="M12 17v5"/></svg>
+        <span class="grow">Connection</span>
+      </button>
+      <button class="nav-item" data-view="help">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><circle cx="12" cy="17" r="0.6" fill="currentColor"/></svg>
+        <span class="grow">Help</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="conn-chip" id="conn-chip" type="button">
+        <span class="dot" id="conn-dot"></span>
+        <span class="conn-text" id="conn-text">Not connected</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="btn-icon menu-btn" id="menu-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="crumbs" id="crumbs"><strong>Overview</strong></div>
+      <div class="topbar-spacer"></div>
+      <span class="pill" id="state-pill">Up to date</span>
+      <a class="btn" href="index.html" target="_blank" rel="noopener" title="Open the public site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M21 3 10 14"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+        <span class="lbl">Preview</span>
+      </a>
+      <button class="btn btn-primary" id="btn-publish">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg>
+        <span class="lbl">Publish</span>
+      </button>
+    </header>
+
+    <div class="content">
+      <section class="view" id="view-overview">
+        <div class="view-head">
+          <div>
+            <h1>Overview</h1>
+            <p id="overview-sub">A quick read on what is live on the site.</p>
+          </div>
+          <div class="view-actions">
+            <button class="btn" id="btn-reload">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+              Reload from GitHub
+            </button>
+            <button class="btn btn-primary" id="btn-new-top">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              New item
+            </button>
+          </div>
+        </div>
+        <div id="overview-root"></div>
+      </section>
+
+      <section class="view" id="view-content" hidden>
+        <div class="view-head">
+          <div>
+            <h1 id="content-title">Tools</h1>
+            <p id="content-sub"></p>
+          </div>
+          <div class="view-actions">
+            <button class="btn btn-primary" id="btn-new">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              New item
+            </button>
+          </div>
+        </div>
+        <div id="content-root"></div>
+      </section>
+
+      <section class="view" id="view-site" hidden>
+        <div class="view-head">
+          <div>
+            <h1>Site settings</h1>
+            <p>Text, links and section labels shown on the public page.</p>
+          </div>
+          <div class="view-actions">
+            <button class="btn" id="btn-site-reset">Reset changes</button>
+            <button class="btn btn-primary" id="btn-site-save">Save changes</button>
+          </div>
+        </div>
+        <div id="site-root"></div>
+      </section>
+
+      <section class="view" id="view-history" hidden>
+        <div class="view-head">
+          <div>
+            <h1>History</h1>
+            <p>Commits that touched data.json. Restore any version into the editor, then publish when you are happy.</p>
+          </div>
+          <div class="view-actions">
+            <button class="btn" id="btn-history-refresh">Refresh</button>
+          </div>
+        </div>
+        <div id="history-root"></div>
+      </section>
+
+      <section class="view" id="view-connection" hidden>
+        <div class="view-head">
+          <div>
+            <h1>Connection</h1>
+            <p>Repository target, token and a live check of every request the dashboard makes.</p>
+          </div>
+        </div>
+        <div id="connection-root"></div>
+      </section>
+
+      <section class="view" id="view-help" hidden>
+        <div class="view-head">
+          <div>
+            <h1>Help</h1>
+            <p>Setup, publishing and what to do when a request fails.</p>
+          </div>
+        </div>
+        <div id="help-root"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ EDITOR DRAWER ============================ -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="drawer-head">
+    <div class="drawer-title" id="drawer-title">Edit item</div>
+    <div class="spacer"></div>
+    <button class="btn-icon" id="drawer-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="drawer-body" id="drawer-body">
+    <div class="field">
+      <label for="f-name">Name <span style="color:var(--red)">*</span></label>
+      <input class="input" id="f-name" placeholder="e.g. SVR 2012 Arena Pack" maxlength="90">
+      <span class="hint" id="f-name-hint"></span>
+    </div>
+
+    <div class="form-row three">
+      <div class="field">
+        <label for="f-cat">Category</label>
+        <select class="select" id="f-cat"></select>
+      </div>
+      <div class="field">
+        <label for="f-version">Version</label>
+        <input class="input" id="f-version" placeholder="v1.0" maxlength="20">
+      </div>
+      <div class="field">
+        <label for="f-price-mode">Price</label>
+        <select class="select" id="f-price-mode">
+          <option value="free">Free</option>
+          <option value="paid">Paid</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field" id="f-price-wrap" hidden>
+      <label for="f-price">Price amount</label>
+      <input class="input" id="f-price" placeholder="$15" maxlength="16">
+    </div>
+
+    <div class="field">
+      <label for="f-icon">Icon</label>
+      <div class="input-group">
+        <input class="input" id="f-icon" placeholder="Pick an emoji below or type one" maxlength="8" style="max-width:160px">
+        <div class="muted" style="font-size:12px">Shown when an item has no image.</div>
+      </div>
+      <div class="emoji-grid" id="emoji-grid"></div>
+    </div>
+
+    <div class="field">
+      <label for="f-desc">Description</label>
+      <textarea class="textarea" id="f-desc" placeholder="What does this item do? A line starting with - becomes a bullet."></textarea>
+      <span class="hint">Plain text. Start a line with <code>-</code> to render it as a bullet in the card.</span>
+    </div>
+
+    <div class="field">
+      <label for="f-features-input">Feature chips</label>
+      <div class="chips-input" id="f-features">
+        <input id="f-features-input" placeholder="Type a feature and press Enter">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="f-tags-input">Tags</label>
+      <div class="chips-input" id="f-tags">
+        <input id="f-tags-input" placeholder="Search keywords, press Enter">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="f-link">Download / store link</label>
+      <input class="input" id="f-link" placeholder="https://amheroher.itch.io/..." spellcheck="false">
+      <span class="hint" id="f-link-hint">Leave empty to show "Coming soon" on the site.</span>
+    </div>
+
+    <div class="field">
+      <label>Image</label>
+      <div class="image-field">
+        <div class="image-preview" id="f-image-preview">+</div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+          <input class="input" id="f-image" placeholder="assets/my-image.png or https://..." spellcheck="false">
+          <div class="row">
+            <button class="btn btn-sm" type="button" id="f-image-upload">Upload to repo</button>
+            <span class="hint" id="f-image-hint">JPG, PNG, WebP up to 2 MB.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row" style="gap:22px;flex-wrap:wrap">
+      <label class="switch">
+        <input type="checkbox" id="f-featured">
+        <span class="track"></span>
+        <span>Featured</span>
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="f-hidden">
+        <span class="track"></span>
+        <span>Hide from site</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <button class="btn btn-danger" id="drawer-delete" type="button" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>
+      Delete
+    </button>
+    <div class="spacer"></div>
+    <button class="btn btn-ghost" id="drawer-cancel" type="button">Cancel</button>
+    <button class="btn btn-primary" id="drawer-save" type="button">Save item</button>
+  </div>
+</aside>
+
+<!-- ============================ MODAL ============================ -->
+<div class="modal-wrap" id="modal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modal-title">Confirm</h2>
+      <p id="modal-sub"></p>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-foot" id="modal-foot"></div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<input type="file" id="file-import" accept="application/json" hidden>
+<input type="file" id="file-image" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+
+<script src="admin.js"></script>
+</body>
+</html>
+

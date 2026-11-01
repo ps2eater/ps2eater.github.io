@@ -3,120 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS2EATER - SVR Modding Tools</title>
+    <title>PS2EATER - SVR Modding Tools &amp; Resources</title>
+    <meta name="description" content="Free tools, custom characters and move packs for WWE SmackDown vs. RAW modding on PlayStation 2. Built by the community.">
+    <meta name="author" content="PS2EATER">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="PS2EATER">
+    <meta property="og:title" content="PS2EATER - SVR Modding Tools &amp; Resources">
+    <meta property="og:description" content="Free tools, custom characters and move packs for WWE SmackDown vs. RAW modding on PlayStation 2.">
+    <meta property="og:image" content="logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<header class="hero">
-    <div class="hero-bg"></div>
+<div class="banner" id="banner" hidden>
+    <span id="banner-text"></span>
+    <button class="banner-close" id="banner-close" type="button" aria-label="Dismiss announcement">&times;</button>
+</div>
+
+<header class="hero" id="top">
     <div class="hero-content">
-        <img src="logo.png" alt="PS2EATER Logo" class="hero-logo">
-        <h1>PS2EATER</h1>
-        <p class="tagline">SVR Modding Tools &amp; Resources</p>
-        <p class="subtitle">Professional-grade tools for WWE SmackDown vs. RAW modding on PS2</p>
+        <img src="logo.png" alt="PS2EATER" class="hero-logo" width="132" height="132">
+        <h1 id="hero-title">PS2EATER</h1>
+        <p class="tagline" id="hero-tagline">SVR Modding Tools &amp; Resources</p>
+        <p class="subtitle" id="hero-subtitle">Professional-grade tools for WWE SmackDown vs. RAW modding on PS2</p>
     </div>
 </header>
 
-<nav class="nav-bar">
+<nav class="nav-bar" aria-label="Sections">
     <div class="nav-inner">
-        <a href="#tools" class="nav-link active">Tools</a>
-        <a href="#characters" class="nav-link">Characters</a>
-        <a href="#movepacks" class="nav-link">Move Packs</a>
-        <a href="#about" class="nav-link">About</a>
+        <a href="#top" class="nav-brand">
+            <img src="logo.png" alt="" width="26" height="26">
+            <span>PS2EATER</span>
+        </a>
+        <div class="nav-links" id="nav-links"></div>
+        <a class="nav-admin" href="admin.html" title="Admin dashboard" aria-label="Admin dashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </a>
     </div>
 </nav>
 
-<main>
-    <section id="tools" class="section">
-        <h2 class="section-title">Modding Tools</h2>
-        <div id="tools-grid" class="grid"></div>
-    </section>
+<main id="main" class="page">
+    <div class="toolbar">
+        <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="search" type="search" placeholder="Search tools, characters, moves..." autocomplete="off" aria-label="Search">
+            <kbd>/</kbd>
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Filter">
+            <button class="chip active" data-mode="all" type="button">All</button>
+            <button class="chip" data-mode="free" type="button">Free</button>
+            <button class="chip" data-mode="paid" type="button">Paid</button>
+            <button class="chip" data-mode="featured" type="button">Featured</button>
+        </div>
+        <select class="sort" id="sort" aria-label="Sort by">
+            <option value="featured">Featured first</option>
+            <option value="newest">Newest</option>
+            <option value="name">Name A-Z</option>
+            <option value="free">Free first</option>
+        </select>
+    </div>
 
-    <section id="characters" class="section">
-        <h2 class="section-title">Custom Characters</h2>
-        <div id="characters-grid" class="grid"></div>
-    </section>
-
-    <section id="movepacks" class="section">
-        <h2 class="section-title">Move Packs</h2>
-        <div id="movepacks-grid" class="grid"></div>
-    </section>
-
-    <section id="about" class="section">
-        <div class="about-box">
-            <h2 class="section-title">About PS2EATER</h2>
-            <p>Building tools and mods for the WWE SmackDown vs. RAW series on PlayStation 2. All tools are free and built for the community.</p>
-            <div class="social-links">
-                <a href="#" class="social-btn">Discord</a>
-                <a href="https://github.com/ps2eater" class="social-btn">GitHub</a>
-                <a href="https://amheroher.itch.io" class="social-btn">itch.io</a>
+    <div id="content">
+        <section class="section">
+            <div class="grid">
+                <div class="skeleton"><div class="sk-box"></div><div class="sk-line title"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+                <div class="skeleton"><div class="sk-box"></div><div class="sk-line title"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+                <div class="skeleton"><div class="sk-box"></div><div class="sk-line title"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
             </div>
+        </section>
+    </div>
+
+    <div class="state" id="empty-state" hidden>
+        <div class="state-icon">&#128269;</div>
+        <h3>No results</h3>
+        <p>Nothing matches your search. Try a different keyword or clear the filters.</p>
+        <button class="btn btn-primary" type="button" id="reset-filters">Clear filters</button>
+    </div>
+
+    <div class="state" id="error-state" hidden>
+        <div class="state-icon">&#9888;&#65039;</div>
+        <h3>Could not load the catalogue</h3>
+        <p id="error-detail">data.json could not be fetched. If you opened this page directly from disk, run it from a local server or the live site.</p>
+        <button class="btn btn-primary" type="button" id="retry">Try again</button>
+    </div>
+
+    <section class="section about-section" id="about">
+        <div class="about-box">
+            <h2>About <span id="about-name">PS2EATER</span></h2>
+            <p id="about-text">Building tools and mods for the WWE SmackDown vs. RAW series on PlayStation 2. Every tool is free and built for the community.</p>
+            <div class="social-links" id="social-links"></div>
         </div>
     </section>
 </main>
 
 <footer>
-    <p>&copy; 2026 PS2EATER. All rights reserved.</p>
+    <div class="footer-inner">
+        <p class="footer-copy" id="footer-copy">&copy; 2026 PS2EATER. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="https://github.com/ps2eater" id="footer-github" rel="noopener">GitHub</a>
+            <a href="https://amheroher.itch.io" id="footer-itch" rel="noopener">itch.io</a>
+            <a href="#top">Back to top</a>
+            <a href="admin.html">Admin</a>
+        </div>
+    </div>
 </footer>
 
 <script>
-function createCard(item, type) {
-    const isFree = !item.price || item.price === 'free' || item.price === '$0';
-    const isPaid = !isFree;
-    const cardClass = type === 'movepacks' ? 'card card-featured' : (isPaid ? 'card card-paid' : 'card');
-    const badgeClass = type === 'movepacks' ? 'card-badge badge-hot' : (isPaid ? 'card-badge badge-paid' : 'card-badge');
-    const btnText = isFree ? 'Download' : `Buy ${item.price}`;
-    const btnClass = isPaid ? 'btn btn-buy' : 'btn btn-primary';
-    const link = item.link || '#';
+(function () {
+    'use strict';
 
-    let imageHtml = '';
-    if (item.image) {
-        imageHtml = `<img src="${item.image}" alt="${item.name}" class="card-image">`;
+    var DATA = null;
+    var VIEW = { q: '', mode: 'all', sort: 'featured' };
+    var DEFAULT_CATS = [
+        { id: 'tools', nav: 'Tools', title: 'Modding Tools' },
+        { id: 'characters', nav: 'Characters', title: 'Custom Characters' },
+        { id: 'movepacks', nav: 'Move Packs', title: 'Move Packs' }
+    ];
+    var $ = function (sel, root) { return (root || document).querySelector(sel); };
+
+    function esc(value) {
+        return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+    function isPaid(item) {
+        var p = String(item.price === undefined || item.price === null ? '' : item.price).trim().toLowerCase();
+        return p !== '' && p !== 'free' && p !== '$0' && p !== '0';
+    }
+    function categories() {
+        var list = Array.isArray(DATA && DATA.categories) && DATA.categories.length ? DATA.categories.slice() : DEFAULT_CATS.slice();
+        return list.sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+    }
+    function itemsOf(cat) {
+        var items = (DATA && Array.isArray(DATA[cat.id])) ? DATA[cat.id] : [];
+        return items.filter(function (i) { return i && !i.hidden; });
     }
 
-    return `
-        <div class="${cardClass}">
-            <div class="${badgeClass}">${item.version}</div>
-            ${imageHtml || `<div class="card-icon">${item.icon || ''}</div>`}
-            <h3>${item.name}</h3>
-            <p>${item.description}</p>
-            <ul class="features">
-                ${(item.features || []).map(f => `<li>${f}</li>`).join('')}
-            </ul>
-            ${isPaid ? `<div class="price-tag">${item.price}</div>` : ''}
-            <a href="${link}" class="${btnClass}" ${link !== '#' ? 'target="_blank"' : ''}>${btnText}</a>
-        </div>
-    `;
-}
-
-fetch('data.json')
-    .then(r => r.json())
-    .then(data => {
-        const toolsGrid = document.getElementById('tools-grid');
-        const charsGrid = document.getElementById('characters-grid');
-        const movesGrid = document.getElementById('movepacks-grid');
-
-        if (data.tools && data.tools.length) {
-            toolsGrid.innerHTML = data.tools.map(t => createCard(t, 'tools')).join('');
-        }
-        if (data.characters && data.characters.length) {
-            charsGrid.innerHTML = data.characters.map(c => createCard(c, 'characters')).join('');
-        } else {
-            document.getElementById('characters').style.display = 'none';
-        }
-        if (data.movepacks && data.movepacks.length) {
-            movesGrid.innerHTML = data.movepacks.map(m => createCard(m, 'movepacks')).join('');
-        }
-
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
+    function descriptionHTML(text) {
+        if (!text) return '';
+        var lines = String(text).split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+        var bullets = [];
+        var prose = [];
+        lines.forEach(function (line) {
+            if (/^[-*\u2022]\s+/.test(line)) bullets.push(line.replace(/^[-*\u2022]\s+/, ''));
+            else prose.push(line);
         });
-    });
-</script>
+        var html = prose.map(function (l) { return '<span>' + esc(l) + '</span>'; }).join('<br>');
+        if (bullets.length) {
+            html += '<ul>' + bullets.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>';
+        }
+        return '<div class="card-desc">' + html + '</div>';
+    }
 
+    var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>';
+    var CART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.3 12.2a1.6 1.6 0 0 0 1.6 1.3h9.2a1.6 1.6 0 0 0 1.6-1.3L21 7H5.2"/></svg>';
+
+    function cardHTML(item, cat) {
+        var paid = isPaid(item);
+        var classes = ['card'];
+        if (paid) classes.push('card-paid');
+        else if (item.featured) classes.push('card-featured');
+
+        var badges = '';
+        if (item.version) badges += '<span class="card-badge">' + esc(item.version) + '</span>';
+        if (item.featured) badges += '<span class="card-badge badge-star">&#9733; Featured</span>';
+        if (paid) badges += '<span class="card-badge badge-hot">Paid</span>';
+
+        var link = String(item.link || '').trim();
+        var cta = link
+            ? '<a class="btn ' + (paid ? 'btn-buy' : 'btn-primary') + '" href="' + esc(link) + '" target="_blank" rel="noopener noreferrer">' +
+              (paid ? 'Buy ' + esc(item.price) + CART : 'Download' + ARROW) + '</a>'
+            : '<span class="btn btn-ghost" title="Link not published yet">Coming soon</span>';
+
+        var media = item.image
+            ? '<img class="card-image" src="' + esc(item.image) + '" alt="' + esc(item.name) + '" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">'
+            : '';
+
+        var features = Array.isArray(item.features) && item.features.length
+            ? '<ul class="features">' + item.features.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>'
+            : '';
+
+        var priceLine = paid
+            ? '<div class="price-tag">' + esc(item.price) + '</div>'
+            : '<div class="price-free">Free</div>';
+
+        return '<article class="' + classes.join(' ') + '">' +
+            '<div class="card-head">' +
+                '<div class="card-icon" aria-hidden="true">' + esc(item.icon || '\uD83C\uDFAE') + '</div>' +
+                '<div class="card-badges">' + badges + '</div>' +
+            '</div>' +
+            media +
+            '<h3>' + esc(item.name || 'Untitled') + '</h3>' +
+            descriptionHTML(item.description) +
+            features +
+            '<div class="card-foot">' + priceLine + cta + '</div>' +
+        '</article>';
+    }
+
+    function matches(item, cat) {
+        if (VIEW.mode === 'free' && isPaid(item)) return false;
+        if (VIEW.mode === 'paid' && !isPaid(item)) return false;
+        if (VIEW.mode === 'featured' && !item.featured) return false;
+        if (VIEW.q) {
+            var hay = []
+                .concat([item.name, item.description, item.version, cat.title, cat.nav])
+                .concat(item.features || [])
+                .concat(item.tags || [])
+                .join(' ')
+                .toLowerCase();
+            if (hay.indexOf(VIEW.q) === -1) return false;
+        }
+        return true;
+    }
+
+    function sortItems(list) {
+        var copy = list.slice();
+        copy.sort(function (a, b) {
+            if (VIEW.sort === 'featured') {
+                return (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || String(a.name || '').localeCompare(String(b.name || ''));
+            }
+            if (VIEW.sort === 'name') return String(a.name || '').localeCompare(String(b.name || ''));
+            if (VIEW.sort === 'newest') return String(b.updated || '').localeCompare(String(a.updated || ''));
+            if (VIEW.sort === 'free') return (isPaid(a) ? 1 : 0) - (isPaid(b) ? 1 : 0);
+            return 0;
+        });
+        return copy;
+    }
+
+    function renderNav() {
+        var nav = $('#nav-links');
+        nav.innerHTML = categories().map(function (cat) {
+            return '<a class="nav-link" href="#' + esc(cat.id) + '">' + esc(cat.nav || cat.title || cat.id) + '</a>';
+        }).join('');
+    }
+
+    function renderContent() {
+        var host = $('#content');
+        var cats = categories();
+        var totalVisible = 0;
+        var html = '';
+
+        cats.forEach(function (cat) {
+            var all = itemsOf(cat);
+            if (!all.length) return;
+            var list = sortItems(all.filter(function (i) { return matches(i, cat); }));
+            totalVisible += list.length;
+            if (!list.length) return;
+
+            html += '<section class="section" id="' + esc(cat.id) + '">' +
+                '<div class="section-head">' +
+                    '<h2 class="section-title">' + esc(cat.title || cat.nav) +
+                        '<span class="section-count">' + list.length + (list.length === all.length ? '' : ' / ' + all.length) + '</span>' +
+                    '</h2>' +
+                    (cat.blurb ? '<p class="section-blurb">' + esc(cat.blurb) + '</p>' : '') +
+                '</div>' +
+                '<div class="grid">' + list.map(function (item) { return cardHTML(item, cat); }).join('') + '</div>' +
+            '</section>';
+        });
+
+        var anyItems = cats.some(function (c) { return itemsOf(c).length > 0; });
+        if (!totalVisible) {
+            host.innerHTML = '';
+            $('#empty-state').hidden = false;
+            $('#empty-state').querySelector('h3').textContent = anyItems ? 'No results' : 'Nothing published yet';
+            $('#empty-state').querySelector('p').textContent = anyItems
+                ? 'Nothing matches your search. Try a different keyword or clear the filters.'
+                : 'The catalogue is empty right now. Check back soon.';
+            $('#empty-state').querySelector('.state-icon').innerHTML = anyItems ? '&#128269;' : '&#128230;';
+            return;
+        }
+        $('#empty-state').hidden = true;
+        host.innerHTML = html;
+    }
+
+    function renderSiteChrome() {
+        var site = DATA.site || {};
+        var title = site.title || 'PS2EATER';
+        document.title = title + (site.tagline ? ' - ' + site.tagline : '');
+        if (site.subtitle) {
+            var meta = document.querySelector('meta[name="description"]');
+            if (meta) meta.setAttribute('content', site.subtitle);
+        }
+        $('#hero-title').textContent = title;
+        if (site.tagline) $('#hero-tagline').textContent = site.tagline;
+        if (site.subtitle) {
+            var sub = $('#hero-subtitle');
+            sub.textContent = site.subtitle;
+            sub.hidden = false;
+        }
+        $('#about-name').textContent = title;
+        if (site.about) $('#about-text').textContent = site.about;
+        if (site.footer) $('#footer-copy').textContent = site.footer;
+
+        var social = site.social || {};
+        var icons = {
+            discord: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 5.6A16 16 0 0 0 15.6 4l-.3.6a12 12 0 0 1 3.4 1.7 11.4 11.4 0 0 0-9.4 0A12 12 0 0 1 12.7 4.6L12.4 4A16 16 0 0 0 8.4 5.6C5.9 9.3 5.2 13 5.6 16.6a16 16 0 0 0 4.9 2.5l1-1.6a10.4 10.4 0 0 1-1.6-.8l.4-.3a11.4 11.4 0 0 0 9.4 0l.4.3a10.4 10.4 0 0 1-1.6.8l1 1.6a16 16 0 0 0 4.9-2.5c.5-4.2-.5-7.9-2.8-11zM9.8 14.4c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9zm4.4 0c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9z"/></svg>',
+            github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.5.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>',
+            itch: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.1 16.2c.6 1.4 1.3 2.4 2.2 3.1 1 .8 2 1 3 1 .8 0 1.5-.2 2.2-.6.6-.4 1-.7 1.5-.7s.9.3 1.5.7c.7.4 1.4.6 2.2.6 1 0 2-.2 3-1 .9-.7 1.6-1.7 2.2-3.1.7-1.8 1-3.8.8-5.8-.1-1.3-1-2.4-2.3-2.6-1-.2-2 .1-2.8.7l-.9.7a8.6 8.6 0 0 1-.6.4l-1.6-1.3a3.4 3.4 0 0 0-2.1-.8c-.8 0-1.5.3-2.1.8l-1.6 1.3-.6-.4-.9-.7c-.8-.6-1.8-.9-2.8-.7-1.3.2-2.2 1.3-2.3 2.6-.2 2 .1 4 .8 5.8zm4.4-2.9a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm9 0a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zM8.5 17.2c1.6.9 5.4.9 7 0 0 0-1.4 1.6-3.5 1.6s-3.5-1.6-3.5-1.6z"/></svg>'
+        };
+        var labels = { discord: 'Discord', github: 'GitHub', itch: 'itch.io' };
+        var links = ['discord', 'github', 'itch'].filter(function (k) { return social[k] && String(social[k]).trim(); });
+        $('#social-links').innerHTML = links.map(function (k) {
+            return '<a class="social-btn" href="' + esc(social[k]) + '" target="_blank" rel="noopener noreferrer">' +
+                (icons[k] || '') + labels[k] + '</a>';
+        }).join('');
+        if (social.github) $('#footer-github').href = social.github;
+        else $('#footer-github').hidden = true;
+        if (social.itch) $('#footer-itch').href = social.itch;
+        else $('#footer-itch').hidden = true;
+
+        var banner = $('#banner');
+        if (site.announcementEnabled && site.announcement && !sessionStorage.getItem('ps2eater.banner.dismissed')) {
+            $('#banner-text').textContent = site.announcement;
+            banner.hidden = false;
+        }
+    }
+
+    function render() {
+        renderSiteChrome();
+        renderNav();
+        renderContent();
+        spy();
+    }
+
+    /* ---------- nav highlighting ---------- */
+    var activeLink = null;
+    function spy() {
+        var sections = Array.prototype.slice.call(document.querySelectorAll('#content .section'));
+        if (!sections.length) return;
+        var fromTop = window.scrollY + 160;
+        var current = null;
+        sections.forEach(function (s) { if (s.offsetTop <= fromTop) current = s.id; });
+        if (!current) current = sections[0].id;
+        document.querySelectorAll('.nav-link').forEach(function (link) {
+            var on = link.getAttribute('href') === '#' + current;
+            if (on && link !== activeLink) {
+                link.classList.add('active');
+                activeLink = link;
+            } else if (!on) {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    /* ---------- events ---------- */
+    var searchEl = $('#search');
+    var debounce;
+    searchEl.addEventListener('input', function () {
+        clearTimeout(debounce);
+        var value = searchEl.value;
+        debounce = setTimeout(function () {
+            VIEW.q = value.trim().toLowerCase();
+            renderContent();
+            spy();
+        }, 120);
+    });
+
+    $('#chips').addEventListener('click', function (e) {
+        var btn = e.target.closest('.chip');
+        if (!btn) return;
+        document.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('active'); });
+        btn.classList.add('active');
+        VIEW.mode = btn.dataset.mode;
+        renderContent();
+        spy();
+    });
+
+    $('#sort').addEventListener('change', function (e) {
+        VIEW.sort = e.target.value;
+        renderContent();
+        spy();
+    });
+
+    $('#reset-filters').addEventListener('click', function () {
+        searchEl.value = '';
+        VIEW.q = '';
+        VIEW.mode = 'all';
+        document.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('active', c.dataset.mode === 'all'); });
+        renderContent();
+    });
+
+    $('#retry').addEventListener('click', function () { load(true); });
+
+    $('#banner-close').addEventListener('click', function () {
+        $('#banner').hidden = true;
+        sessionStorage.setItem('ps2eater.banner.dismissed', '1');
+    });
+
+    document.addEventListener('keydown', function (e) {
+        var tag = (document.activeElement && document.activeElement.tagName) || '';
+        var typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+        if (e.key === '/' && !typing) {
+            e.preventDefault();
+            searchEl.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === searchEl) {
+            searchEl.value = '';
+            VIEW.q = '';
+            renderContent();
+        }
+    });
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { spy(); ticking = false; });
+    }, { passive: true });
+
+    /* ---------- data ---------- */
+    function load(force) {
+        $('#error-state').hidden = true;
+        return fetch('data.json' + (force ? '?t=' + Date.now() : ''), { cache: force ? 'no-store' : 'default' })
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status + ' while loading data.json');
+                return res.json();
+            })
+            .then(function (data) {
+                DATA = data || {};
+                render();
+            })
+            .catch(function (err) {
+                $('#content').innerHTML = '';
+                $('#empty-state').hidden = true;
+                $('#error-state').hidden = false;
+                $('#error-detail').textContent = 'data.json could not be fetched (' + err.message + '). ' +
+                    (location.protocol === 'file:' ? 'Serve the folder over HTTP instead of opening the file directly.' : 'Check that data.json exists in the repository root.');
+            });
+    }
+
+    load(false);
+})();
+</script>
 </body>
 </html>
+
