@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /admin.html
+Sitemap: https://ps2eater.github.io/sitemap.xml

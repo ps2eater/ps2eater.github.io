@@ -248,7 +248,9 @@
       footer: '',
       social: { discord: '', github: '', itch: '' }
     }, data.site || {});
-    data.site.social = Object.assign({ discord: '', github: '', itch: '' }, data.site.social || {});
+    data.site.social = Object.assign({
+      discord: '', patreon: '', facebook: '', telegram: '', tiktok: '', x: '', github: '', itch: ''
+    }, data.site.social || {});
 
     if (!Array.isArray(data.categories) || !data.categories.length) {
       data.categories = clone(DEFAULT_CATS);
@@ -273,6 +275,12 @@
   function cats() { return S.data ? S.data.categories : clone(DEFAULT_CATS); }
   function catById(id) { return cats().filter(function (c) { return c.id === id; })[0] || null; }
   function items(catId) { return (S.data && Array.isArray(S.data[catId])) ? S.data[catId] : []; }
+  function isCatView(id) { return cats().some(function (c) { return c.id === id; }); }
+  function firstCatId() {
+    var list = cats();
+    return list.length ? list[0].id : 'tools';
+  }
+  var CAT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg>';
   function allItems() {
     var out = [];
     cats().forEach(function (cat) {
@@ -506,21 +514,33 @@
     qs('#login').hidden = true;
     qs('#app').hidden = false;
     S.selection = [];
+    if (!isCatView(S.cat)) S.cat = firstCatId();
     renderAll();
   }
 
   /* ------------------------------------------------------------- rendering */
 
   function renderAll() {
-    renderNavCounts();
+    renderContentNav();
     renderStatusChip();
     renderView();
   }
 
-  function renderNavCounts() {
-    cats().forEach(function (cat) {
-      var node = qs('#count-' + cat.id);
-      if (node) node.textContent = items(cat.id).length;
+  function renderContentNav() {
+    var host = qs('#nav-content');
+    if (!host) return;
+    host.innerHTML = cats().map(function (cat) {
+      return '<button class="nav-item" data-view="' + esc(cat.id) + '" type="button">' +
+        CAT_ICON +
+        '<span class="grow">' + esc(cat.nav || cat.title || cat.id) + '</span>' +
+        '<span class="count" id="count-' + esc(cat.id) + '">' + items(cat.id).length + '</span>' +
+      '</button>';
+    }).join('');
+    qsa('.nav-item', host).forEach(function (btn) {
+      btn.addEventListener('click', function () { setView(btn.getAttribute('data-view')); });
+    });
+    qsa('.nav-item').forEach(function (item) {
+      item.classList.toggle('active', item.getAttribute('data-view') === S.view);
     });
   }
 
@@ -564,11 +584,11 @@
     qsa('.view').forEach(function (view) { view.hidden = true; });
     qsa('.nav-item').forEach(function (item) {
       var target = item.getAttribute('data-view');
-      var active = target === S.view || (['tools', 'characters', 'movepacks'].indexOf(S.view) !== -1 && target === S.view);
+      var active = target === S.view;
       item.classList.toggle('active', active);
     });
 
-    if (['tools', 'characters', 'movepacks'].indexOf(S.view) !== -1) {
+    if (isCatView(S.view)) {
       S.cat = S.view;
       qs('#view-content').hidden = false;
       renderContent();
@@ -904,6 +924,12 @@
   function renderSite() {
     var site = S.data.site;
     var host = qs('#site-root');
+    var social = site.social || {};
+
+    function socialInput(key, label, placeholder) {
+      return '<div class="field" style="margin-top:10px"><label>' + label + '</label>' +
+        '<input class="input" data-field="site.social.' + key + '" value="' + esc(social[key] || '') + '" placeholder="' + esc(placeholder) + '" spellcheck="false"></div>';
+    }
 
     var sections = cats().map(function (cat, index) {
       return '<div class="card" style="margin-bottom:10px" data-catcard="' + esc(cat.id) + '">' +
@@ -912,6 +938,7 @@
           '<div class="row">' +
             '<button class="btn-icon" data-order="' + esc(cat.id) + '" data-dir="-1" title="Move up" ' + (index === 0 ? 'disabled' : '') + '>' + icon('up') + '</button>' +
             '<button class="btn-icon" data-order="' + esc(cat.id) + '" data-dir="1" title="Move down" ' + (index === cats().length - 1 ? 'disabled' : '') + '>' + icon('down') + '</button>' +
+            '<button class="btn-icon danger" data-cat-action="delete" data-cat-id="' + esc(cat.id) + '" title="Delete this section">' + icon('trash') + '</button>' +
           '</div></div>' +
         '<div class="form-row">' +
           '<div class="field"><label>Nav label</label><input class="input" data-cat="' + esc(cat.id) + '" data-catfield="nav" value="' + esc(cat.nav) + '"></div>' +
@@ -943,14 +970,21 @@
           '</div>' +
           '<div class="card">' +
             '<div class="card-head"><div><div class="card-title">Social links</div><div class="card-sub">Empty fields are hidden on the site</div></div></div>' +
-            '<div class="field"><label>Discord invite</label><input class="input" data-field="site.social.discord" value="' + esc(site.social.discord) + '" placeholder="https://discord.gg/..."></div>' +
-            '<div class="field" style="margin-top:10px"><label>GitHub</label><input class="input" data-field="site.social.github" value="' + esc(site.social.github) + '" placeholder="https://github.com/ps2eater"></div>' +
-            '<div class="field" style="margin-top:10px"><label>itch.io</label><input class="input" data-field="site.social.itch" value="' + esc(site.social.itch) + '" placeholder="https://amheroher.itch.io"></div>' +
+            socialInput('discord', 'Discord invite', 'https://discord.gg/...') +
+            socialInput('telegram', 'Telegram channel', 'https://t.me/ps2eater') +
+            socialInput('x', 'X (Twitter)', 'https://x.com/...') +
+            socialInput('tiktok', 'TikTok', 'https://www.tiktok.com/@...') +
+            socialInput('facebook', 'Facebook page', 'https://www.facebook.com/...') +
+            socialInput('patreon', 'Patreon', 'https://www.patreon.com/...') +
+            socialInput('github', 'GitHub', 'https://github.com/ps2eater') +
+            socialInput('itch', 'itch.io', 'https://amheroher.itch.io') +
           '</div>' +
         '</div>' +
         '<div class="stack">' +
           '<div class="card"><div class="card-head"><div><div class="card-title">Sections</div>' +
-            '<div class="card-sub">Order and labels used across the site</div></div></div>' + sections + '</div>' +
+            '<div class="card-sub">Order and labels used across the site</div></div>' +
+            '<button class="btn btn-sm" id="btn-site-add-section" type="button">' + icon('plus') + 'Add section</button></div>' +
+            sections + '</div>' +
           '<div class="card"><div class="card-title">Tips</div>' +
             '<div class="check-list" style="margin-top:10px">' +
               checkRow({ status: 'ok', title: 'Changes are drafts', detail: 'Nothing goes live until you press Publish.' }) +
@@ -1299,7 +1333,8 @@
   }
 
   function openEditor(catId, itemId) {
-    S.draftCat = catId || S.cat;
+    if (!isCatView(catId)) catId = isCatView(S.cat) ? S.cat : firstCatId();
+    S.draftCat = catId;
     var list = items(S.draftCat);
     var index = -1;
     if (itemId) {
@@ -1491,8 +1526,25 @@
     if (JSON.stringify(base.site || {}) !== JSON.stringify(S.data.site)) {
       changes.push({ type: 'mod', label: 'Site settings', where: 'Site' });
     }
-    if (JSON.stringify(base.categories || []) !== JSON.stringify(S.data.categories)) {
-      changes.push({ type: 'mod', label: 'Section labels and order', where: 'Site' });
+    var beforeCats = {};
+    (base.categories || []).forEach(function (c) { beforeCats[c.id] = c; });
+    var afterCats = {};
+    cats().forEach(function (c) { afterCats[c.id] = c; });
+    var sectionDelta = 0;
+    cats().forEach(function (c) {
+      if (!beforeCats[c.id]) {
+        sectionDelta++;
+        changes.push({ type: 'add', label: 'Section "' + (c.nav || c.title || c.id) + '"', where: 'Sections' });
+      }
+    });
+    (base.categories || []).forEach(function (c) {
+      if (!afterCats[c.id]) {
+        sectionDelta++;
+        changes.push({ type: 'del', label: 'Section "' + (c.nav || c.title || c.id) + '"', where: 'Sections' });
+      }
+    });
+    if (!sectionDelta && JSON.stringify(base.categories || []) !== JSON.stringify(S.data.categories)) {
+      changes.push({ type: 'mod', label: 'Section labels and order', where: 'Sections' });
     }
     return changes;
   }
@@ -1677,14 +1729,15 @@
       qs('#sidebar').classList.toggle('open');
     });
 
-    qsa('.nav-item').forEach(function (item) {
+    qsa('.nav-item[data-view]').forEach(function (item) {
       item.addEventListener('click', function () { setView(item.getAttribute('data-view')); });
     });
 
     qs('#conn-chip').addEventListener('click', function () { setView('connection'); });
     qs('#btn-publish').addEventListener('click', openPublish);
     qs('#btn-reload').addEventListener('click', reloadFromGitHub);
-    qs('#btn-new-top').addEventListener('click', function () { openEditor(S.cat || 'tools'); });
+    qs('#btn-new-top').addEventListener('click', function () { openEditor(isCatView(S.cat) ? S.cat : firstCatId()); });
+    qs('#btn-add-section').addEventListener('click', addSectionDialog);
     qs('#btn-new').addEventListener('click', function () { openEditor(S.cat); });
     qs('#btn-history-refresh').addEventListener('click', function () {
       S.commits = null;
@@ -1765,6 +1818,9 @@
     qs('#site-root').addEventListener('input', onSiteField);
     qs('#site-root').addEventListener('change', onSiteField);
     qs('#site-root').addEventListener('click', function (e) {
+      if (e.target.closest('#btn-site-add-section')) { addSectionDialog(); return; }
+      var del = e.target.closest('[data-cat-action="delete"]');
+      if (del) { deleteSection(del.getAttribute('data-cat-id')); return; }
       var btn = e.target.closest('[data-order]');
       if (!btn) return;
       moveCategory(btn.getAttribute('data-order'), Number(btn.getAttribute('data-dir')));
@@ -1912,8 +1968,103 @@
     list[target] = swapped;
     list.forEach(function (cat, i) { cat.order = i + 1; });
     renderSite();
-    renderNavCounts();
+    renderContentNav();
     updateDirtyPill();
+  }
+
+  function sectionId(name) {
+    var base = slug(name) || 'section';
+    var taken = {};
+    cats().forEach(function (c) { taken[c.id] = true; });
+    var id = base, n = 2;
+    while (taken[id]) { id = base + '-' + n; n++; }
+    return id;
+  }
+
+  function addSectionDialog() {
+    openModal({
+      title: 'Add a section',
+      sub: 'A section becomes a nav link and a heading on the public site. Rename or reorder it later from Site settings.',
+      body:
+        '<div class="field"><label for="new-cat-name">Section name</label>' +
+          '<input class="input" id="new-cat-name" placeholder="e.g. Arenas" maxlength="40" autocomplete="off">' +
+        '</div>' +
+        '<div class="field" style="margin-top:12px"><label for="new-cat-title">Heading on the page</label>' +
+          '<input class="input" id="new-cat-title" placeholder="Leave empty to reuse the name" maxlength="60"></div>' +
+        '<div class="field" style="margin-top:12px"><label for="new-cat-blurb">Short description</label>' +
+          '<input class="input" id="new-cat-blurb" placeholder="One line shown under the heading" maxlength="140"></div>' +
+        '<div class="hint" id="new-cat-id-note" style="margin-top:12px"></div>',
+      actions: [
+        { label: 'Cancel', kind: 'btn-ghost', spacer: true },
+        { label: 'Add section', kind: 'btn-primary', keepOpen: true, onClick: submitNewSection }
+      ]
+    });
+
+    var nameEl = qs('#new-cat-name');
+    var note = qs('#new-cat-id-note');
+    function syncNote() {
+      var value = nameEl.value.trim();
+      note.textContent = value ? 'Link anchor on the site: #' + sectionId(value) : 'The name also becomes the #anchor of the section.';
+    }
+    nameEl.addEventListener('input', syncNote);
+    nameEl.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); submitNewSection(); }
+    });
+    syncNote();
+    setTimeout(function () { nameEl.focus(); }, 60);
+  }
+
+  function submitNewSection() {
+    var nameEl = qs('#new-cat-name');
+    var name = (nameEl.value || '').trim();
+    if (!name) {
+      nameEl.classList.add('invalid');
+      nameEl.focus();
+      toast('Give the section a name first', 'warn');
+      return;
+    }
+    var id = sectionId(name);
+    var heading = (qs('#new-cat-title').value || '').trim() || name;
+    var blurb = (qs('#new-cat-blurb').value || '').trim();
+    S.data.categories.push({ id: id, nav: name, title: heading, blurb: blurb, order: cats().length + 1 });
+    if (!Array.isArray(S.data[id])) S.data[id] = [];
+    closeModal();
+    renderContentNav();
+    if (S.view === 'site') renderAll();
+    else setView(id);
+    toast('Section created', 'ok', '"' + name + '" is a draft until you publish.');
+  }
+
+  function deleteSection(catId) {
+    var cat = catById(catId);
+    if (!cat) return;
+    if (cats().length <= 1) {
+      toast('Keep at least one section', 'warn', 'The site needs somewhere to show items.');
+      return;
+    }
+    var count = items(catId).length;
+    var label = cat.nav || cat.title || cat.id;
+    confirmDialog(
+      'Delete the "' + label + '" section?',
+      count
+        ? count + ' item' + (count === 1 ? '' : 's') + ' inside it will be deleted too. Move them to another section first if you want to keep them.'
+        : 'It is empty, so nothing else is removed.',
+      'Delete section',
+      true
+    ).then(function (ok) { if (ok) removeSection(catId); });
+  }
+
+  function removeSection(catId) {
+    var cat = catById(catId);
+    var label = cat ? (cat.nav || cat.title || cat.id) : catId;
+    S.data.categories = cats().filter(function (c) { return c.id !== catId; });
+    S.data.categories.forEach(function (c, i) { c.order = i + 1; });
+    delete S.data[catId];
+    if (S.cat === catId) S.cat = firstCatId();
+    if (S.view === catId) S.view = 'site';
+    S.selection = [];
+    renderAll();
+    toast('Section "' + label + '" deleted', 'ok', 'Publish to remove it from the live site.');
   }
 
   var saveSiteField = debounce(function () { updateDirtyPill(); }, 120);
@@ -1933,7 +2084,8 @@
       var cat = catById(catId);
       if (!cat) return;
       cat[catField] = e.target.value;
-      if (catField === 'nav') renderNavCounts();
+      if (catField === 'nav') renderContentNav();
+      if (catField === 'title' && S.view === catId) renderContent();
       saveSiteField();
     }
   }
@@ -2083,7 +2235,7 @@
     }
     if (e.key === '/' && !qs('#app').hidden) {
       e.preventDefault();
-      if (['tools', 'characters', 'movepacks'].indexOf(S.view) === -1) setView(S.cat);
+      if (!isCatView(S.view)) setView(isCatView(S.cat) ? S.cat : firstCatId());
       var search = qs('#content-search');
       if (search) search.focus();
     }

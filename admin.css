@@ -182,6 +182,18 @@ svg { display: block; }
 }
 .nav-item.active .count { color: var(--gold); background: rgba(201, 168, 76, 0.14); }
 
+.nav-add {
+  margin-top: 4px;
+  border: 1px dashed #2a2a2a;
+  color: var(--dim);
+  background: transparent;
+  width: 100%;
+}
+.nav-add:hover { color: var(--gold); border-color: rgba(201, 168, 76, 0.3); background: rgba(201, 168, 76, 0.05); }
+.nav-add svg { color: inherit; }
+
+.btn-icon.danger:hover { color: var(--red); border-color: rgba(255, 77, 94, 0.3); background: rgba(255, 77, 94, 0.08); }
+
 .sidebar-foot { padding: 12px; border-top: 1px solid var(--line-soft); }
 .conn-chip {
   display: flex; align-items: center; gap: 8px;
