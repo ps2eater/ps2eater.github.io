@@ -43,20 +43,20 @@
       "name": "Save Converter",
       "version": "v1.0.0",
       "icon": "🔄",
-      "description": "Convert save files between different formats for SVR games.",
+      "description": "Convert save files between different formats for SVR games.\nIf you find any saved file online and want to convert it to a PCSX2 or even a PS2 folder, you can easily do so with this tool.",
       "features": [
         "Format conversion",
         "Easy to use"
       ],
-      "price": "free",
-      "link": "",
-      "image": "",
-      "featured": false,
-      "hidden": false,
       "tags": [
         "Save"
       ],
-      "updated": "2026-10-28"
+      "price": "free",
+      "link": "https://sharemods.com/flmevpcnuqhy/PS2EATER_Save_Converter_v1.0.0.zip.html",
+      "image": "assets/download-6-mvxsqn02.png",
+      "featured": true,
+      "hidden": false,
+      "updated": "2026-11-01"
     }
   ],
   "characters": [
