@@ -420,7 +420,7 @@
     /* ---------- data ---------- */
     function load(force) {
         $('#error-state').hidden = true;
-        return fetch('data.json' + (force ? '?t=' + Date.now() : ''), { cache: force ? 'no-store' : 'default' })
+        return fetch('data.json?v=' + Date.now(), { cache: 'no-store' })
             .then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status + ' while loading data.json');
                 return res.json();
