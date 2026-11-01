@@ -386,6 +386,7 @@ table.table { width: 100%; border-collapse: collapse; min-width: 780px; }
 .tag.green { color: var(--green); background: rgba(62, 207, 142, 0.1); border-color: rgba(62, 207, 142, 0.22); }
 .tag.blue { color: var(--blue); background: rgba(91, 157, 255, 0.1); border-color: rgba(91, 157, 255, 0.22); }
 .tag.dim { color: var(--dim); }
+.tag.amber { color: var(--amber); background: rgba(240, 180, 41, 0.1); border-color: rgba(240, 180, 41, 0.24); }
 .row-actions { display: flex; gap: 2px; justify-content: flex-end; }
 .row-actions .btn-icon { width: 30px; height: 30px; }
 .row-actions .btn-icon svg { width: 15px; height: 15px; }
@@ -462,6 +463,15 @@ table.table { width: 100%; border-collapse: collapse; min-width: 780px; }
 
 /* emoji picker */
 .emoji-grid { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; max-height: 118px; overflow-y: auto; padding-right: 4px; }
+.emoji-grid.extra { margin-top: 6px; margin-bottom: 4px; max-height: 96px; }
+.icon-set-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 10px;
+}
 .emoji-grid button {
   width: 32px; height: 32px; border-radius: 8px;
   border: 1px solid #242424; background: #111;
@@ -543,6 +553,14 @@ table.table { width: 100%; border-collapse: collapse; min-width: 780px; }
 .toast .t-body small { display: block; color: var(--dim); font-size: 11.5px; margin-top: 2px; }
 .toast a { color: var(--gold); }
 @keyframes toastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes shakeX {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(3px); }
+}
+.drawer.shake { animation: shakeX 0.42s var(--ease); }
 @keyframes toastOut { to { opacity: 0; transform: translateX(20px); } }
 
 /* ============ LOGIN ============ */

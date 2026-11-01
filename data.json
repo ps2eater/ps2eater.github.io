@@ -1,62 +1,104 @@
 {
   "site": {
     "title": "PS2EATER",
-    "tagline": "SVR Modding Tools & Resources",
-    "subtitle": "Professional-grade tools for WWE SmackDown vs. RAW modding on PS2",
+    "tagline": "SVR Mods, Characters & Upgrades",
+    "subtitle": "Custom superstars, fresh move sets and gameplay upgrades for WWE SmackDown vs. RAW on PlayStation 2.",
     "about": "Building tools and mods for the WWE SmackDown vs. RAW series on PlayStation 2. Every tool is free and built for the community.",
     "announcement": "",
     "announcementEnabled": false,
-    "footer": "© 2026 PS2EATER. All rights reserved.",
+    "footer": "\u00A9 2026 PS2EATER. All rights reserved.",
     "social": {
-      "discord": "",
+      "discord": "https://discord.gg/BvmDS3NWrB",
+      "patreon": "https://www.patreon.com/PS2EATER",
+      "facebook": "https://www.facebook.com/PS2EATER",
+      "telegram": "https://t.me/ps2eater",
+      "tiktok": "https://www.tiktok.com/@ps2eater",
+      "x": "https://x.com/amrheroher",
       "github": "https://github.com/ps2eater",
       "itch": "https://amheroher.itch.io"
     },
     "updated": "2026-11-01"
   },
   "categories": [
-    {
-      "id": "tools",
-      "nav": "Tools",
-      "title": "Modding Tools",
-      "blurb": "Editors, converters and utilities for SVR 2006–2011.",
-      "order": 1
-    },
-    {
-      "id": "characters",
-      "nav": "Characters",
-      "title": "Custom Characters",
-      "blurb": "Hand-built superstars, ready to drop into your roster.",
-      "order": 2
-    },
-    {
-      "id": "movepacks",
-      "nav": "Move Packs",
-      "title": "Move Packs",
-      "blurb": "Move sets ported and tuned between SVR titles.",
-      "order": 3
-    }
+    { "id": "tools", "nav": "Tools", "title": "Modding Tools", "blurb": "Editors, converters and utilities for SVR 2006\u20132011.", "order": 1 },
+    { "id": "characters", "nav": "Characters", "title": "Custom Characters", "blurb": "Hand-built superstars, ready to drop into your roster.", "order": 2 },
+    { "id": "movepacks", "nav": "Move Packs", "title": "Move Packs", "blurb": "Move sets ported and tuned between SVR titles.", "order": 3 }
   ],
   "tools": [
+    {
+      "id": "svr-2010-save-editor",
+      "name": "SVR 2010 Save Editor",
+      "version": "v0.2.8",
+      "icon": "\uD83D\uDCBE",
+      "description": "Edit your SVR 2010 save files. Customize entrances, create superstar templates (Taker, Rock, Stone Cold), and more.",
+      "features": ["Entrance editing", "Superstar templates", "Python & HTML versions"],
+      "price": "free",
+      "link": "",
+      "image": "",
+      "featured": false,
+      "hidden": false,
+      "tags": ["Save", "SVR 2010"],
+      "updated": "2026-10-28"
+    },
+    {
+      "id": "svr-anim-editor-x",
+      "name": "SVR Anim Editor X",
+      "version": "v8.1",
+      "icon": "\uD83C\uDFAC",
+      "description": "The ultimate animation editor for SVR. WAZE editor, import/export, sound & damage editing, flag editor, and more.",
+      "features": ["WAZE editor", "Sound & damage editing", "New slot creation", "ID finder & flag editor"],
+      "price": "free",
+      "link": "",
+      "image": "",
+      "featured": true,
+      "hidden": false,
+      "tags": ["Animation", "Flags"],
+      "updated": "2026-10-28"
+    },
+    {
+      "id": "svr-texswap",
+      "name": "SVR TexSwap",
+      "version": "v1.0.7",
+      "icon": "\uD83C\uDFA8",
+      "description": "Two-pane texture swap tool with atlas merge and PNG import/export support.",
+      "features": ["Two-pane texture swap", "Atlas merge", "PNG import/export"],
+      "price": "free",
+      "link": "",
+      "image": "",
+      "featured": false,
+      "hidden": false,
+      "tags": ["Textures"],
+      "updated": "2026-10-28"
+    },
+    {
+      "id": "svr-part-transplanter",
+      "name": "SVR Part Transplanter",
+      "version": "v1.5.0",
+      "icon": "\uD83D\uDD27",
+      "description": "Port parts between characters with full texture, bone, and physics handling.",
+      "features": ["Part porting", "Texture handling", "Bone & physics support"],
+      "price": "free",
+      "link": "",
+      "image": "",
+      "featured": false,
+      "hidden": false,
+      "tags": ["Modeling"],
+      "updated": "2026-10-28"
+    },
     {
       "id": "save-converter",
       "name": "Save Converter",
       "version": "v1.0.0",
-      "icon": "🔄",
-      "description": "Convert save files between different formats for SVR games.\nIf you find any saved file online and want to convert it to a PCSX2 or even a PS2 folder, you can easily do so with this tool.",
-      "features": [
-        "Format conversion",
-        "Easy to use"
-      ],
-      "tags": [
-        "Save"
-      ],
+      "icon": "\uD83D\uDD04",
+      "description": "Convert save files between different formats for SVR games.",
+      "features": ["Format conversion", "Easy to use"],
       "price": "free",
-      "link": "https://sharemods.com/flmevpcnuqhy/PS2EATER_Save_Converter_v1.0.0.zip.html",
-      "image": "assets/download-6-mvxsqn02.png",
-      "featured": true,
+      "link": "",
+      "image": "",
+      "featured": false,
       "hidden": false,
-      "updated": "2026-11-01"
+      "tags": ["Save"],
+      "updated": "2026-10-28"
     }
   ],
   "characters": [
@@ -64,64 +106,16 @@
       "id": "royce-keys-946",
       "name": "Royce Keys - 946 SVR MOD 06-11",
       "version": "v1.0",
-      "icon": "🎭",
+      "icon": "\uD83C\uDFAD",
       "description": "Compatible with:\n- WWE SmackDown vs. Raw 2006\n- WWE SmackDown vs. Raw 2007\n- WWE SmackDown vs. Raw 2008\n- WWE SmackDown vs. Raw 2009\n- WWE SmackDown vs. Raw 2010\n- WWE SmackDown vs. Raw 2011",
-      "features": [
-        "Custom character",
-        "Multi-game compatible"
-      ],
-      "tags": [
-        "Character"
-      ],
+      "features": ["Custom character", "Multi-game compatible"],
       "price": "$15",
       "link": "https://amheroher.itch.io/royce-keys",
-      "image": "https://img.itch.zone/aW1nLzMxNjEzOTU1LnBuZw==/original/zhcska.png",
+      "image": "https://img.itch.zone/aW1nLzMxMjEzOTU1LnBuZw==/original/zhcska.png",
       "featured": true,
       "hidden": false,
-      "updated": "2026-11-01"
-    },
-    {
-      "id": "roxanne-perez-26",
-      "name": "ROXANNE PEREZ 26",
-      "version": "2",
-      "icon": "🏁",
-      "description": "NO HYBRID SLOTS !\n\nCompatible with:\n\n• WWE SmackDown vs. Raw 2006\n\n• WWE SmackDown vs. Raw 2007\n\n• WWE SmackDown vs. Raw 2008\n\n• WWE SmackDown vs. Raw 2009\n\n• WWE SmackDown vs. Raw 2010\n\n• WWE SmackDown vs. Raw 2011\n\nNO HYBRID SLOTS!",
-      "features": [],
-      "tags": [
-        "wwe",
-        "svr",
-        "ps2",
-        "mods",
-        "divas"
-      ],
-      "price": "20",
-      "link": "https://www.patreon.com/posts/roxanne-perez-26-173591157",
-      "image": "https://c10.patreonusercontent.com/4/patreon-media/p/post/173591157/033499f9a34640c093be46c2bf5ecd85/eyJ3IjoxMDgwfQ%3D%3D/1.png?token-hash=OTStUlVmb64hsFZBtc41UxZI-LM-_4sONGo6bdArNLw%3D&token-time=1794787200",
-      "featured": true,
-      "hidden": false,
-      "updated": "2026-11-01"
-    },
-    {
-      "id": "pac-2026",
-      "name": "PAC 2026",
-      "version": "",
-      "icon": "🦇",
-      "description": "wwe 2k26 referance Credit For @GRIX\n\nPAC 2026 SVR MOD @PS2EATER\n\n1 hybrid slot for Hair\n\nfree mod for Benjamin Satterley / PAC / Neville\n\nhttps://youtu.be/TbW5YKzaypE\n\nImportant:\n\nIf you use any of my mods or content, please give credit by including my YouTube channel link in your description.\n\nUsing any of my work without credit may result in a copyright strike. I now have access to YouTube's copyright tools, so make sure to include the link to my channel:\n\nhttps://www.youtube.com/c/PS2Eater\n\n____________________________________\n\nImportant:\n\nIf you use any of my mods or content, please give credit by including my YouTube channel link in your description.\n\nUsing any of my work without credit may result in a copyright strike. I now have access to YouTube's copyright tools, so make sure to include the link to my channel:\n\nhttps://www.youtube.com/c/PS2Eater\n\nOpen for commissions\n\nCustom wrestlers, attires, moves,more",
-      "features": [],
-      "tags": [
-        "wwe",
-        "ps2",
-        "mods",
-        "svr",
-        "patreon",
-        "ps2eater"
-      ],
-      "price": "free",
-      "link": "https://www.patreon.com/PS2EATER/posts/free-pac-2026-170829956",
-      "image": "https://c10.patreonusercontent.com/4/patreon-media/p/post/170829956/5ab6247e8bdd43e9aa8909ab3afe87d8/eyJ3IjoxMDgwfQ%3D%3D/1.png?token-hash=nryvnEmx-IxctLfg9pvzEry-619GZnIhPgULzL0dm6U%3D&token-time=1794787200",
-      "featured": true,
-      "hidden": false,
-      "updated": "2026-11-01"
+      "tags": ["Character"],
+      "updated": "2026-10-30"
     }
   ],
   "movepacks": [
@@ -129,22 +123,15 @@
       "id": "svr-2011-move-pack",
       "name": "SVR 2011 Move Pack",
       "version": "v23",
-      "icon": "💥",
+      "icon": "\uD83D\uDCA5",
       "description": "170+ moves from SVR 2010 ported into SVR 2011. Strict vanilla size limits respected.",
-      "features": [
-        "170+ moves",
-        "2010 → 2011 port",
-        "Vanilla-safe sizes"
-      ],
+      "features": ["170+ moves", "2010 \u2192 2011 port", "Vanilla-safe sizes"],
       "price": "free",
       "link": "",
       "image": "",
       "featured": true,
       "hidden": false,
-      "tags": [
-        "Move set",
-        "SVR 2011"
-      ],
+      "tags": ["Move set", "SVR 2011"],
       "updated": "2026-10-30"
     }
   ]

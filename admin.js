@@ -20,6 +20,18 @@
     '\uD83C\uDFB5 \uD83D\uDDBC\uFE0F \uD83D\uDD79\uFE0F \uD83C\uDF9B\uFE0F \uD83E\uDDF0 \uD83D\uDD2C \uD83D\uDCE1 \uD83E\uDD4A \uD83C\uDFC5 \uD83E\uDDF1 \u2728 \uD83D\uDE80 ' +
     '\uD83C\uDFC1 \uD83E\uDD47 \uD83D\uDC7E \uD83C\uDFF9 \uD83C\uDF9F\uFE0F \uD83D\uDCF1 \uD83D\uDD0C \uD83D\uDCC0 \uD83D\uDD17').split(' ');
 
+  /* Arcade, gear, audio and legend icons. Built from code points so the file
+     stays ASCII and no editor can mangle the characters. */
+  var EMOJIS_EXTRA = [
+    0x1F579, 0x1F3B2, 0x1F3B0, 0x1FA84, 0x1FA99, 0x1F52E, 0x1F6D2, 0x2699,
+    0x1FA9B, 0x1F50B, 0x1F4A1, 0x1F5A5, 0x1F4BB, 0x2328, 0x1F4BE, 0x1F9F2,
+    0x1F3C1, 0x1F947, 0x1F948, 0x1F3BD, 0x1F94A, 0x1F93C, 0x1F3CB, 0x1F938,
+    0x1F3AC, 0x1F39E, 0x1F3A7, 0x1F3A4, 0x1F3BC, 0x1F3B9, 0x1F941, 0x1F4FB,
+    0x1F4FA, 0x1F4F7, 0x1F479, 0x1F47A, 0x1F9BE, 0x1F9E0, 0x1F451, 0x1F48E,
+    0x1F5FF, 0x1F531, 0x2694, 0x1F6E1, 0x1FA93, 0x1F9E8, 0x1F387, 0x1F4AB,
+    0x1F310, 0x1F9ED
+  ].map(function (code) { return String.fromCodePoint(code); });
+
   /* ---------------------------------------------------------------- utils */
 
   function qs(sel, root) { return (root || document).querySelector(sel); }
@@ -102,6 +114,7 @@
     draft: null,
     draftCat: 'tools',
     draftIndex: -1,
+    draftSnapshot: null,
     commits: null,
     rate: null,
     checks: [],
@@ -855,6 +868,7 @@
         : '<span class="tag dim">Coming soon</span>';
 
       var status = [];
+      if (item.status === 'soon') status.push('<span class="tag amber">Coming soon</span>');
       if (item.hidden) status.push('<span class="tag">Hidden</span>');
       if (item.featured) status.push('<span class="tag gold">Featured</span>');
       if (!status.length) status.push('<span class="tag blue">Live</span>');
@@ -1314,9 +1328,13 @@
   }
 
   function renderEmojiGrid() {
-    qs('#emoji-grid').innerHTML = EMOJIS.map(function (emoji) {
-      return '<button type="button" data-emoji="' + esc(emoji) + '">' + emoji + '</button>';
-    }).join('');
+    var html = function (list) {
+      return list.map(function (emoji) {
+        return '<button type="button" data-emoji="' + esc(emoji) + '">' + emoji + '</button>';
+      }).join('');
+    };
+    qs('#emoji-grid').innerHTML = html(EMOJIS);
+    if (qs('#emoji-grid-extra')) qs('#emoji-grid-extra').innerHTML = html(EMOJIS_EXTRA);
   }
 
   function renderChips(containerId, field) {
@@ -1359,7 +1377,7 @@
     qs('#f-image').value = S.draft.image || '';
     qs('#f-featured').checked = !!S.draft.featured;
     qs('#f-hidden').checked = !!S.draft.hidden;
-    qs('#f-price-mode').value = isPaid(S.draft) ? 'paid' : 'free';
+    qs('#f-price-mode').value = S.draft.status === 'soon' ? 'soon' : (isPaid(S.draft) ? 'paid' : 'free');
     qs('#f-price').value = isPaid(S.draft) ? S.draft.price : '';
     qs('#f-name').classList.remove('invalid');
     qs('#f-name-hint').textContent = '';
@@ -1367,23 +1385,54 @@
 
     renderChips('f-features', 'features');
     renderChips('f-tags', 'tags');
-    qsa('#emoji-grid button').forEach(function (btn) {
+    qsa('#emoji-grid button, #emoji-grid-extra button').forEach(function (btn) {
       btn.classList.toggle('picked', btn.getAttribute('data-emoji') === S.draft.icon);
     });
 
     updatePriceVisibility();
     updateImagePreview();
+    S.draftSnapshot = JSON.stringify(collectDraft());
 
     qs('#overlay').classList.add('show');
     qs('#drawer').classList.add('open');
     setTimeout(function () { qs('#f-name').focus(); }, 80);
   }
 
-  function closeEditor() {
+  function collectDraft() {
+    var mode = qs('#f-price-mode').value;
+    var paid = mode === 'paid';
+    return {
+      name: qs('#f-name').value.trim(),
+      version: qs('#f-version').value.trim(),
+      icon: qs('#f-icon').value.trim(),
+      description: qs('#f-desc').value.trim(),
+      features: (S.draft && S.draft.features ? S.draft.features : []).slice(),
+      tags: (S.draft && S.draft.tags ? S.draft.tags : []).slice(),
+      price: paid ? (qs('#f-price').value.trim() || '$0') : 'free',
+      status: mode === 'soon' ? 'soon' : '',
+      link: qs('#f-link').value.trim(),
+      image: qs('#f-image').value.trim(),
+      featured: qs('#f-featured').checked,
+      hidden: qs('#f-hidden').checked
+    };
+  }
+
+  function isDraftDirty() {
+    if (!S.draft || !S.draftSnapshot) return false;
+    return JSON.stringify(collectDraft()) !== S.draftSnapshot;
+  }
+
+  function closeEditor(force) {
+    if (!force && isDraftDirty()) {
+      confirmDialog('Discard what you typed?', 'This item has details that are not saved yet.', 'Discard', true)
+        .then(function (ok) { if (ok) closeEditor(true); });
+      return;
+    }
     qs('#drawer').classList.remove('open');
     qs('#overlay').classList.remove('show');
     S.draft = null;
     S.draftIndex = -1;
+    S.draftSnapshot = null;
   }
 
   function updatePriceVisibility() {
@@ -1408,23 +1457,23 @@
       return;
     }
     var targetCat = qs('#f-cat').value;
-    var paid = qs('#f-price-mode').value === 'paid';
-    var price = paid ? (qs('#f-price').value.trim() || '$0') : 'free';
+    var draft = collectDraft();
     var item = {
       id: S.draft.id || uniqueId(targetCat, name),
-      name: name,
-      version: qs('#f-version').value.trim(),
-      icon: qs('#f-icon').value.trim() || '\uD83C\uDFAE',
-      description: qs('#f-desc').value.trim(),
-      features: (S.draft.features || []).slice(),
-      tags: (S.draft.tags || []).slice(),
-      price: price,
-      link: qs('#f-link').value.trim(),
-      image: qs('#f-image').value.trim(),
-      featured: qs('#f-featured').checked,
-      hidden: qs('#f-hidden').checked,
+      name: draft.name,
+      version: draft.version,
+      icon: draft.icon || '\uD83C\uDFAE',
+      description: draft.description,
+      features: draft.features,
+      tags: draft.tags,
+      price: draft.price,
+      link: draft.link,
+      image: draft.image,
+      featured: draft.featured,
+      hidden: draft.hidden,
       updated: todayISO()
     };
+    if (draft.status) item.status = draft.status;
 
     if (S.draftIndex >= 0) {
       if (targetCat === S.draftCat) {
@@ -1438,7 +1487,7 @@
     }
 
     var wasEditing = S.draftIndex >= 0;
-    closeEditor();
+    closeEditor(true);
     S.view = targetCat;
     S.cat = targetCat;
     renderAll();
@@ -1452,8 +1501,8 @@
     var item = list[index];
     var ok = await confirmDialog('Delete "' + item.name + '"?', 'The item leaves your draft right away. The live site changes only after you publish.', 'Delete', true);
     if (!ok) return;
-    closeEditor();
     list.splice(index, 1);
+    closeEditor(true);
     S.selection = S.selection.filter(function (x) { return x !== id; });
     renderAll();
     toast('Deleted ' + item.name, 'ok', 'Publish to remove it from the site.');
@@ -1850,9 +1899,17 @@
     });
 
     /* drawer */
-    qs('#drawer-close').addEventListener('click', closeEditor);
-    qs('#drawer-cancel').addEventListener('click', closeEditor);
-    qs('#overlay').addEventListener('click', closeEditor);
+    qs('#drawer-close').addEventListener('click', function () { closeEditor(); });
+    qs('#drawer-cancel').addEventListener('click', function () { closeEditor(); });
+    qs('#overlay').addEventListener('click', function () {
+      // Clicking the backdrop used to wipe the form. Keep the draft and nudge instead.
+      if (!S.draft) return;
+      var drawer = qs('#drawer');
+      drawer.classList.remove('shake');
+      void drawer.offsetWidth;
+      drawer.classList.add('shake');
+      toast('Your draft is still open', 'info', 'Press Save item, or Cancel to discard it.');
+    });
     qs('#drawer-save').addEventListener('click', saveEditor);
     qs('#drawer-delete').addEventListener('click', function () {
       var id = S.draft && S.draft.id;
@@ -1866,12 +1923,16 @@
       if (file) handleImageFile(file);
       e.target.value = '';
     });
-    qs('#emoji-grid').addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-emoji]');
-      if (!btn) return;
-      qs('#f-icon').value = btn.getAttribute('data-emoji');
-      qsa('#emoji-grid button').forEach(function (b) { b.classList.remove('picked'); });
-      btn.classList.add('picked');
+    ['#emoji-grid', '#emoji-grid-extra'].forEach(function (sel) {
+      var grid = qs(sel);
+      if (!grid) return;
+      grid.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-emoji]');
+        if (!btn) return;
+        qs('#f-icon').value = btn.getAttribute('data-emoji');
+        qsa('#emoji-grid button, #emoji-grid-extra button').forEach(function (b) { b.classList.remove('picked'); });
+        btn.classList.add('picked');
+      });
     });
     bindChipField('f-features', 'features');
     bindChipField('f-tags', 'tags');

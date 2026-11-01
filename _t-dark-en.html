@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        try {
+            if (localStorage.getItem('ps2eater.theme') === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        } catch (e) { /* storage blocked */ }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS2EATER - SVR Mods, Characters &amp; Upgrades</title>
+    <meta name="description" content="Custom superstars, move packs, save editors and gameplay upgrades for WWE SmackDown vs. RAW on PlayStation 2. Built by the community.">
+    <meta name="keywords" content="PS2EATER, SVR modding, WWE SmackDown vs Raw mods, SVR 2010 save editor, SVR Anim Editor X, PS2 texture swap, SVR move packs, custom characters PS2">
+    <meta name="author" content="PS2EATER">
+    <meta name="publisher" content="PS2EATER">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-title" content="PS2EATER">
+    <meta name="application-name" content="PS2EATER">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="PS2EATER">
+    <meta property="og:title" content="PS2EATER - SVR Mods, Characters &amp; Upgrades">
+    <meta property="og:description" content="Custom superstars, move packs, save editors and gameplay upgrades for WWE SmackDown vs. RAW on PlayStation 2.">
+    <meta property="og:image" content="https://ps2eater.github.io/logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="PS2EATER logo">
+    <meta property="og:url" id="og-url" content="https://ps2eater.github.io/">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PS2EATER - SVR Mods, Characters &amp; Upgrades">
+    <meta name="twitter:description" content="Custom superstars, move packs, save editors and gameplay upgrades for WWE SmackDown vs. RAW on PlayStation 2.">
+    <meta name="twitter:image" id="twitter-image" content="https://ps2eater.github.io/logo.png">
+    <meta name="twitter:site" content="@amrheroher">
+    <link rel="canonical" id="canonical-url" href="https://ps2eater.github.io/">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <script type="application/ld+json" id="structured-data">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://ps2eater.github.io/#website","url":"https://ps2eater.github.io/","name":"PS2EATER","description":"Custom superstars, move packs, save editors and gameplay upgrades for WWE SmackDown vs. RAW on PlayStation 2.","inLanguage":"en","publisher":{"@type":"Organization","name":"PS2EATER","url":"https://ps2eater.github.io/","logo":{"@type":"ImageObject","url":"https://ps2eater.github.io/logo.png"},"sameAs":["https://discord.gg/BvmDS3NWrB","https://www.patreon.com/PS2EATER","https://www.facebook.com/PS2EATER","https://t.me/ps2eater","https://www.tiktok.com/@ps2eater","https://x.com/amrheroher","https://github.com/ps2eater","https://amheroher.itch.io"]}}]}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>localStorage.setItem('ps2eater.theme','dark');localStorage.setItem('ps2eater.lang','en');</script>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="banner" id="banner" hidden>
+    <span id="banner-text"></span>
+    <button class="banner-close" id="banner-close" type="button" aria-label="Dismiss announcement">&times;</button>
+</div>
+
+<header class="hero" id="top">
+    <div class="hero-content">
+        <img src="logo.png" alt="PS2EATER" class="hero-logo" width="132" height="132">
+        <h1 id="hero-title">PS2EATER</h1>
+        <p class="tagline" id="hero-tagline">SVR Mods, Characters &amp; Upgrades</p>
+        <p class="subtitle" id="hero-subtitle">Custom superstars, fresh move sets and gameplay upgrades for WWE SmackDown vs. RAW on PlayStation 2.</p>
+    </div>
+</header>
+
+<nav class="nav-bar" aria-label="Sections">
+    <div class="nav-inner">
+        <a href="#top" class="nav-brand">
+            <img src="logo.png" alt="" width="26" height="26">
+            <span>PS2EATER</span>
+        </a>
+        <div class="nav-links" id="nav-links"></div>
+        <div class="nav-tools">
+        <a class="nav-cta" id="nav-discord" href="#" target="_blank" rel="noopener me" hidden>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.6 5.6A16 16 0 0 0 15.6 4l-.3.6a12 12 0 0 1 3.4 1.7 11.4 11.4 0 0 0-9.4 0A12 12 0 0 1 12.7 4.6L12.4 4A16 16 0 0 0 8.4 5.6C5.9 9.3 5.2 13 5.6 16.6a16 16 0 0 0 4.9 2.5l1-1.6a10.4 10.4 0 0 1-1.6-.8l.4-.3a11.4 11.4 0 0 0 9.4 0l.4.3a10.4 10.4 0 0 1-1.6.8l1 1.6a16 16 0 0 0 4.9-2.5c.5-4.2-.5-7.9-2.8-11zM9.8 14.4c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9zm4.4 0c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9z"/></svg>
+            <span data-i18n="joinDiscord">Join Discord</span>
+        </a>
+        <button class="nav-icon" id="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+            <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z"/></svg>
+            <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        </button>
+        <label class="lang-wrap" title="Language">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg>
+            <select id="lang-select" aria-label="Language">
+                <option value="en">EN</option>
+                <option value="ar">ع</option>
+                <option value="es">ES</option>
+                <option value="hi">हि</option>
+            </select>
+        </label>
+        <a class="nav-admin" href="admin.html" title="Admin dashboard" aria-label="Admin dashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </a>
+        </div>
+    </div>
+</nav>
+
+<section class="social-band" id="community" aria-labelledby="community-title">
+    <div class="social-band-inner">
+        <div class="social-band-head">
+            <h2 id="community-title" data-i18n="communityTitle">Join the community</h2>
+            <p data-i18n="communitySub">Updates, drops and support - pick your platform.</p>
+        </div>
+        <div class="social-tiles" id="social-tiles"></div>
+    </div>
+</section>
+
+<main id="main" class="page">
+    <div class="toolbar">
+        <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="search" type="search" placeholder="Search tools, characters, moves..." data-i18n-ph="searchPlaceholder" autocomplete="off" aria-label="Search">
+            <kbd>/</kbd>
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Filter">
+            <button class="chip active" data-mode="all" data-i18n="all" type="button">All</button>
+            <button class="chip" data-mode="free" data-i18n="free" type="button">Free</button>
+            <button class="chip" data-mode="paid" data-i18n="paid" type="button">Paid</button>
+            <button class="chip" data-mode="featured" data-i18n="featured" type="button">Featured</button>
+        </div>
+        <select class="sort" id="sort" aria-label="Sort by">
+            <option value="featured" data-i18n="sortFeatured">Featured first</option>
+            <option value="newest" data-i18n="sortNewest">Newest</option>
+            <option value="name" data-i18n="sortName">Name A-Z</option>
+            <option value="free" data-i18n="sortFree">Free first</option>
+        </select>
+    </div>
+
+    <div id="content">
+        <section class="section">
+            <div class="grid">
+                <div class="skeleton"><div class="sk-box"></div><div class="sk-line title"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+                <div class="skeleton"><div class="sk-box"></div><div class="sk-line title"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+                <div class="skeleton"><div class="sk-box"></div><div class="sk-line title"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="state" id="empty-state" hidden>
+        <div class="state-icon">&#128269;</div>
+        <h3>No results</h3>
+        <p data-i18n="noResultsText">Nothing matches your search. Try a different keyword or clear the filters.</p>
+        <button class="btn btn-primary" type="button" id="reset-filters" data-i18n="clearFilters">Clear filters</button>
+    </div>
+
+    <div class="state" id="error-state" hidden>
+        <div class="state-icon">&#9888;&#65039;</div>
+        <h3 data-i18n="errorTitle">Could not load the catalogue</h3>
+        <p id="error-detail">data.json could not be fetched. If you opened this page directly from disk, run it from a local server or the live site.</p>
+        <button class="btn btn-primary" type="button" id="retry" data-i18n="retry">Try again</button>
+    </div>
+
+    <section class="section about-section" id="about">
+        <div class="about-box">
+            <h2><span data-i18n="about">About</span> <span id="about-name">PS2EATER</span></h2>
+            <p id="about-text">Building tools and mods for the WWE SmackDown vs. RAW series on PlayStation 2. Every tool is free and built for the community.</p>
+            <div class="social-links" id="social-links"></div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <p class="footer-copy" id="footer-copy">&copy; 2026 PS2EATER. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="https://github.com/ps2eater" id="footer-github" rel="noopener">GitHub</a>
+            <a href="https://amheroher.itch.io" id="footer-itch" rel="noopener">itch.io</a>
+            <a href="#top" data-i18n="backToTop">Back to top</a>
+            <a href="admin.html" data-i18n="admin">Admin</a>
+        </div>
+    </div>
+</footer>
+
+<a class="contact-fab" id="contact-fab" href="https://discord.gg/BvmDS3NWrB" target="_blank" rel="noopener me" hidden>
+    <span class="contact-fab-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 5.6A16 16 0 0 0 15.6 4l-.3.6a12 12 0 0 1 3.4 1.7 11.4 11.4 0 0 0-9.4 0A12 12 0 0 1 12.7 4.6L12.4 4A16 16 0 0 0 8.4 5.6C5.9 9.3 5.2 13 5.6 16.6a16 16 0 0 0 4.9 2.5l1-1.6a10.4 10.4 0 0 1-1.6-.8l.4-.3a11.4 11.4 0 0 0 9.4 0l.4.3a10.4 10.4 0 0 1-1.6.8l1 1.6a16 16 0 0 0 4.9-2.5c.5-4.2-.5-7.9-2.8-11zM9.8 14.4c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9zm4.4 0c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9z"/></svg>
+    </span>
+    <span class="contact-fab-text"><span data-i18n="contactMe">Contact me on</span> <b>DISCORD</b></span>
+</a>
+
+<script>
+(function () {
+    'use strict';
+
+    var DATA = null;
+    var VIEW = { q: '', mode: 'all', sort: 'featured' };
+    var DEFAULT_CATS = [
+        { id: 'tools', nav: 'Tools', title: 'Modding Tools' },
+        { id: 'characters', nav: 'Characters', title: 'Custom Characters' },
+        { id: 'movepacks', nav: 'Move Packs', title: 'Move Packs' }
+    ];
+    var $ = function (sel, root) { return (root || document).querySelector(sel); };
+    var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+
+    /* ---------- language ---------- */
+    var LANG = 'en';
+    var THEME = 'dark';
+    var I18N = {
+        en: {
+            communityTitle: 'Join the community',
+            communitySub: 'Updates, drops and support - pick your platform.',
+            searchPlaceholder: 'Search tools, characters, moves...',
+            all: 'All', free: 'Free', paid: 'Paid', featured: 'Featured',
+            sortFeatured: 'Featured first', sortNewest: 'Newest', sortName: 'Name A-Z', sortFree: 'Free first',
+            download: 'Download', buy: 'Buy', comingSoon: 'Coming soon',
+            about: 'About', backToTop: 'Back to top', admin: 'Admin',
+            joinDiscord: 'Join Discord', contactMe: 'Contact me on',
+            noResults: 'No results',
+            noResultsText: 'Nothing matches your search. Try a different keyword or clear the filters.',
+            nothing: 'Nothing published yet',
+            nothingText: 'The catalogue is empty right now. Check back soon.',
+            clearFilters: 'Clear filters',
+            errorTitle: 'Could not load the catalogue',
+            retry: 'Try again',
+            subs: {
+                discord: 'Join the server', telegram: 'Channel updates', x: 'Latest posts', tiktok: 'Short clips',
+                facebook: 'Official page', patreon: 'Support the work', github: 'Source code', itch: 'Store page'
+            }
+        },
+        ar: {
+            communityTitle: 'انضم للمجتمع',
+            communitySub: 'تحديثات وإصدارات ودعم — اختر منصتك.',
+            searchPlaceholder: 'ابحث في الأدوات والشخصيات والحركات...',
+            all: 'الكل', free: 'مجاني', paid: 'مدفوع', featured: 'مميّز',
+            sortFeatured: 'المميّز أولًا', sortNewest: 'الأحدث', sortName: 'الاسم أ-ي', sortFree: 'المجاني أولًا',
+            download: 'تحميل', buy: 'شراء', comingSoon: 'قريبًا',
+            about: 'عن', backToTop: 'للأعلى', admin: 'الإدارة',
+            joinDiscord: 'انضم لديسكورد', contactMe: 'تواصل معي على',
+            noResults: 'لا توجد نتائج',
+            noResultsText: 'لا شيء يطابق بحثك. جرّب كلمة أخرى أو امسح الفلاتر.',
+            nothing: 'لا يوجد محتوى منشور بعد',
+            nothingText: 'الكتالوج فاضي حاليًا. ارجع قريبًا.',
+            clearFilters: 'مسح الفلاتر',
+            errorTitle: 'تعذّر تحميل الكتالوج',
+            retry: 'إعادة المحاولة',
+            subs: {
+                discord: 'انضم للسيرفر', telegram: 'تحديثات القناة', x: 'أحدث المنشورات', tiktok: 'مقاطع قصيرة',
+                facebook: 'الصفحة الرسمية', patreon: 'ادعم العمل', github: 'الكود المصدري', itch: 'صفحة المتجر'
+            }
+        },
+        es: {
+            communityTitle: 'Únete a la comunidad',
+            communitySub: 'Novedades, lanzamientos y soporte: elige tu plataforma.',
+            searchPlaceholder: 'Buscar herramientas, personajes, movimientos...',
+            all: 'Todo', free: 'Gratis', paid: 'De pago', featured: 'Destacado',
+            sortFeatured: 'Destacados primero', sortNewest: 'Más recientes', sortName: 'Nombre A-Z', sortFree: 'Gratis primero',
+            download: 'Descargar', buy: 'Comprar', comingSoon: 'Próximamente',
+            about: 'Acerca de', backToTop: 'Volver arriba', admin: 'Admin',
+            joinDiscord: 'Unirse a Discord', contactMe: 'Contáctame en',
+            noResults: 'Sin resultados',
+            noResultsText: 'Nada coincide con tu búsqueda. Prueba otra palabra o borra los filtros.',
+            nothing: 'Nada publicado todavía',
+            nothingText: 'El catálogo está vacío por ahora. Vuelve pronto.',
+            clearFilters: 'Borrar filtros',
+            errorTitle: 'No se pudo cargar el catálogo',
+            retry: 'Reintentar',
+            subs: {
+                discord: 'Únete al servidor', telegram: 'Novedades del canal', x: 'Últimas publicaciones', tiktok: 'Clips cortos',
+                facebook: 'Página oficial', patreon: 'Apoya el trabajo', github: 'Código fuente', itch: 'Tienda'
+            }
+        },
+        hi: {
+            communityTitle: 'समुदाय से जुड़ें',
+            communitySub: 'अपडेट, रिलीज़ और सहायता — अपना प्लेटफ़ॉर्म चुनें।',
+            searchPlaceholder: 'टूल, कैरेक्टर और मूव खोजें...',
+            all: 'सभी', free: 'मुफ़्त', paid: 'पेड', featured: 'विशेष',
+            sortFeatured: 'विशेष पहले', sortNewest: 'नवीनतम', sortName: 'नाम A-Z', sortFree: 'मुफ़्त पहले',
+            download: 'डाउनलोड', buy: 'खरीदें', comingSoon: 'जल्द आ रहा है',
+            about: 'के बारे में', backToTop: 'ऊपर जाएँ', admin: 'एडमिन',
+            joinDiscord: 'डिस्कॉर्ड से जुड़ें', contactMe: 'मुझसे संपर्क करें',
+            noResults: 'कोई परिणाम नहीं',
+            noResultsText: 'आपकी खोज से कुछ मेल नहीं खाता। दूसरा शब्द आज़माएँ या फ़िल्टर हटाएँ।',
+            nothing: 'अभी कुछ प्रकाशित नहीं',
+            nothingText: 'कैटलॉग अभी खाली है। जल्द वापस आएँ।',
+            clearFilters: 'फ़िल्टर हटाएँ',
+            errorTitle: 'कैटलॉग लोड नहीं हो सका',
+            retry: 'फिर कोशिश करें',
+            subs: {
+                discord: 'सर्वर से जुड़ें', telegram: 'चैनल अपडेट', x: 'नई पोस्ट', tiktok: 'छोटे क्लिप',
+                facebook: 'आधिकारिक पेज', patreon: 'काम का समर्थन करें', github: 'सोर्स कोड', itch: 'स्टोर पेज'
+            }
+        }
+    };
+
+    function t(key) {
+        var pack = I18N[LANG] || I18N.en;
+        return pack[key] !== undefined ? pack[key] : (I18N.en[key] !== undefined ? I18N.en[key] : key);
+    }
+    function tsub(key) {
+        var pack = I18N[LANG] || I18N.en;
+        return (pack.subs && pack.subs[key]) || (I18N.en.subs && I18N.en.subs[key]) || '';
+    }
+    function applyI18n() {
+        $$('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
+        $$('[data-i18n-ph]').forEach(function (el) { el.placeholder = t(el.getAttribute('data-i18n-ph')); });
+    }
+    function applyTheme(theme) {
+        THEME = theme === 'light' ? 'light' : 'dark';
+        if (THEME === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        else document.documentElement.removeAttribute('data-theme');
+        try { localStorage.setItem('ps2eater.theme', THEME); } catch (e) { /* ignore */ }
+    }
+    function applyLang(lang) {
+        LANG = I18N[lang] ? lang : 'en';
+        document.documentElement.setAttribute('lang', LANG);
+        document.documentElement.setAttribute('dir', LANG === 'ar' ? 'rtl' : 'ltr');
+        try { localStorage.setItem('ps2eater.lang', LANG); } catch (e) { /* ignore */ }
+        var sel = $('#lang-select');
+        if (sel) sel.value = LANG;
+        if (DATA) render();
+        else applyI18n();
+    }
+    function openDiscordPopup(e) {
+        var fab = $('#contact-fab');
+        var url = fab ? fab.href : '';
+        if (!url) return;
+        if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
+        var w = 460, h = 700;
+        var left = Math.max(0, Math.round((screen.width - w) / 2));
+        var top = Math.max(0, Math.round((screen.height - h) / 2));
+        var win = window.open(url, 'ps2eater_discord',
+            'popup=yes,width=' + w + ',height=' + h + ',left=' + left + ',top=' + top + ',resizable=yes,scrollbars=yes');
+        if (win) {
+            if (e) e.preventDefault();
+            win.focus();
+        }
+    }
+
+    function esc(value) {
+        return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+    function isPaid(item) {
+        var p = String(item.price === undefined || item.price === null ? '' : item.price).trim().toLowerCase();
+        return p !== '' && p !== 'free' && p !== '$0' && p !== '0';
+    }
+    function categories() {
+        var list = Array.isArray(DATA && DATA.categories) && DATA.categories.length ? DATA.categories.slice() : DEFAULT_CATS.slice();
+        return list.sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+    }
+    function itemsOf(cat) {
+        var items = (DATA && Array.isArray(DATA[cat.id])) ? DATA[cat.id] : [];
+        return items.filter(function (i) { return i && !i.hidden; });
+    }
+
+    function descriptionHTML(text) {
+        if (!text) return '';
+        var lines = String(text).split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+        var bullets = [];
+        var prose = [];
+        lines.forEach(function (line) {
+            if (/^[-*\u2022]\s+/.test(line)) bullets.push(line.replace(/^[-*\u2022]\s+/, ''));
+            else prose.push(line);
+        });
+        var html = prose.map(function (l) { return '<span>' + esc(l) + '</span>'; }).join('<br>');
+        if (bullets.length) {
+            html += '<ul>' + bullets.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>';
+        }
+        return '<div class="card-desc">' + html + '</div>';
+    }
+
+    var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>';
+    var CART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.3 12.2a1.6 1.6 0 0 0 1.6 1.3h9.2a1.6 1.6 0 0 0 1.6-1.3L21 7H5.2"/></svg>';
+
+    function cardHTML(item, cat) {
+        var paid = isPaid(item);
+        var soon = String(item.status || '') === 'soon';
+        var classes = ['card'];
+        if (paid) classes.push('card-paid');
+        else if (item.featured) classes.push('card-featured');
+        if (soon) classes.push('card-soon');
+
+        var badges = '';
+        if (item.version) badges += '<span class="card-badge">' + esc(item.version) + '</span>';
+        if (item.featured) badges += '<span class="card-badge badge-star">&#9733; ' + esc(t('featured')) + '</span>';
+        if (paid) badges += '<span class="card-badge badge-hot">' + esc(t('paid')) + '</span>';
+        if (soon) badges += '<span class="card-badge badge-soon">' + esc(t('comingSoon')) + '</span>';
+
+        var link = String(item.link || '').trim();
+        var cta = soon
+            ? '<span class="btn btn-soon">' + esc(t('comingSoon')) + '</span>'
+            : link
+                ? '<a class="btn ' + (paid ? 'btn-buy' : 'btn-primary') + '" href="' + esc(link) + '" target="_blank" rel="noopener noreferrer">' +
+                  (paid ? esc(t('buy')) + ' ' + esc(item.price) + CART : esc(t('download')) + ARROW) + '</a>'
+                : '<span class="btn btn-ghost" title="Link not published yet">' + esc(t('comingSoon')) + '</span>';
+
+        var media = item.image
+            ? '<img class="card-image" src="' + esc(item.image) + '" alt="' + esc(item.name) + '" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">'
+            : '';
+
+        var features = Array.isArray(item.features) && item.features.length
+            ? '<ul class="features">' + item.features.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>'
+            : '';
+
+        var priceLine = paid
+            ? '<div class="price-tag">' + esc(item.price) + '</div>'
+            : '<div class="price-free">' + esc(t('free')) + '</div>';
+
+        return '<article class="' + classes.join(' ') + '">' +
+            '<div class="card-head">' +
+                '<div class="card-icon" aria-hidden="true">' + esc(item.icon || '\uD83C\uDFAE') + '</div>' +
+                '<div class="card-badges">' + badges + '</div>' +
+            '</div>' +
+            media +
+            '<h3>' + esc(item.name || 'Untitled') + '</h3>' +
+            descriptionHTML(item.description) +
+            features +
+            '<div class="card-foot">' + priceLine + cta + '</div>' +
+        '</article>';
+    }
+
+    function matches(item, cat) {
+        if (VIEW.mode === 'free' && isPaid(item)) return false;
+        if (VIEW.mode === 'paid' && !isPaid(item)) return false;
+        if (VIEW.mode === 'featured' && !item.featured) return false;
+        if (VIEW.q) {
+            var hay = []
+                .concat([item.name, item.description, item.version, cat.title, cat.nav])
+                .concat(item.features || [])
+                .concat(item.tags || [])
+                .join(' ')
+                .toLowerCase();
+            if (hay.indexOf(VIEW.q) === -1) return false;
+        }
+        return true;
+    }
+
+    function sortItems(list) {
+        var copy = list.slice();
+        copy.sort(function (a, b) {
+            if (VIEW.sort === 'featured') {
+                return (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || String(a.name || '').localeCompare(String(b.name || ''));
+            }
+            if (VIEW.sort === 'name') return String(a.name || '').localeCompare(String(b.name || ''));
+            if (VIEW.sort === 'newest') return String(b.updated || '').localeCompare(String(a.updated || ''));
+            if (VIEW.sort === 'free') return (isPaid(a) ? 1 : 0) - (isPaid(b) ? 1 : 0);
+            return 0;
+        });
+        return copy;
+    }
+
+    function renderNav() {
+        var nav = $('#nav-links');
+        nav.innerHTML = categories().filter(function (cat) {
+            return itemsOf(cat).length > 0;
+        }).map(function (cat) {
+            return '<a class="nav-link" href="#' + esc(cat.id) + '">' + esc(cat.nav || cat.title || cat.id) + '</a>';
+        }).join('');
+    }
+
+    function renderContent() {
+        var host = $('#content');
+        var cats = categories();
+        var totalVisible = 0;
+        var html = '';
+
+        cats.forEach(function (cat) {
+            var all = itemsOf(cat);
+            if (!all.length) return;
+            var list = sortItems(all.filter(function (i) { return matches(i, cat); }));
+            totalVisible += list.length;
+            if (!list.length) return;
+
+            html += '<section class="section" id="' + esc(cat.id) + '">' +
+                '<div class="section-head">' +
+                    '<h2 class="section-title">' + esc(cat.title || cat.nav) +
+                        '<span class="section-count">' + list.length + (list.length === all.length ? '' : ' / ' + all.length) + '</span>' +
+                    '</h2>' +
+                    (cat.blurb ? '<p class="section-blurb">' + esc(cat.blurb) + '</p>' : '') +
+                '</div>' +
+                '<div class="grid">' + list.map(function (item) { return cardHTML(item, cat); }).join('') + '</div>' +
+            '</section>';
+        });
+
+        var anyItems = cats.some(function (c) { return itemsOf(c).length > 0; });
+        if (!totalVisible) {
+            host.innerHTML = '';
+            $('#empty-state').hidden = false;
+            $('#empty-state').querySelector('h3').textContent = anyItems ? t('noResults') : t('nothing');
+            $('#empty-state').querySelector('p').textContent = anyItems
+                ? t('noResultsText')
+                : t('nothingText');
+            $('#empty-state').querySelector('.state-icon').innerHTML = anyItems ? '&#128269;' : '&#128230;';
+            return;
+        }
+        $('#empty-state').hidden = true;
+        host.innerHTML = html;
+    }
+
+    function renderSiteChrome() {
+        var site = DATA.site || {};
+        var title = site.title || 'PS2EATER';
+        document.title = title + (site.tagline ? ' - ' + site.tagline : '');
+        if (site.subtitle) {
+            var meta = document.querySelector('meta[name="description"]');
+            if (meta) meta.setAttribute('content', site.subtitle);
+        }
+        $('#hero-title').textContent = title;
+        if (site.tagline) $('#hero-tagline').textContent = site.tagline;
+        if (site.subtitle) {
+            var sub = $('#hero-subtitle');
+            sub.textContent = site.subtitle;
+            sub.hidden = false;
+        }
+        $('#about-name').textContent = title;
+        if (site.about) $('#about-text').textContent = site.about;
+        if (site.footer) $('#footer-copy').textContent = site.footer;
+
+        var social = site.social || {};
+        var icons = {
+            discord: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 5.6A16 16 0 0 0 15.6 4l-.3.6a12 12 0 0 1 3.4 1.7 11.4 11.4 0 0 0-9.4 0A12 12 0 0 1 12.7 4.6L12.4 4A16 16 0 0 0 8.4 5.6C5.9 9.3 5.2 13 5.6 16.6a16 16 0 0 0 4.9 2.5l1-1.6a10.4 10.4 0 0 1-1.6-.8l.4-.3a11.4 11.4 0 0 0 9.4 0l.4.3a10.4 10.4 0 0 1-1.6.8l1 1.6a16 16 0 0 0 4.9-2.5c.5-4.2-.5-7.9-2.8-11zM9.8 14.4c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9zm4.4 0c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9z"/></svg>',
+            github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.5.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>',
+            itch: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.1 16.2c.6 1.4 1.3 2.4 2.2 3.1 1 .8 2 1 3 1 .8 0 1.5-.2 2.2-.6.6-.4 1-.7 1.5-.7s.9.3 1.5.7c.7.4 1.4.6 2.2.6 1 0 2-.2 3-1 .9-.7 1.6-1.7 2.2-3.1.7-1.8 1-3.8.8-5.8-.1-1.3-1-2.4-2.3-2.6-1-.2-2 .1-2.8.7l-.9.7a8.6 8.6 0 0 1-.6.4l-1.6-1.3a3.4 3.4 0 0 0-2.1-.8c-.8 0-1.5.3-2.1.8l-1.6 1.3-.6-.4-.9-.7c-.8-.6-1.8-.9-2.8-.7-1.3.2-2.2 1.3-2.3 2.6-.2 2 .1 4 .8 5.8zm4.4-2.9a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm9 0a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zM8.5 17.2c1.6.9 5.4.9 7 0 0 0-1.4 1.6-3.5 1.6s-3.5-1.6-3.5-1.6z"/></svg>'
+        };
+        var labels = { discord: 'Discord', github: 'GitHub', itch: 'itch.io' };
+        var links = ['discord', 'github', 'itch'].filter(function (k) { return social[k] && String(social[k]).trim(); });
+        $('#social-links').innerHTML = links.map(function (k) {
+            return '<a class="social-btn" href="' + esc(social[k]) + '" target="_blank" rel="noopener noreferrer">' +
+                (icons[k] || '') + labels[k] + '</a>';
+        }).join('');
+        if (social.github) $('#footer-github').href = social.github;
+        else $('#footer-github').hidden = true;
+        if (social.itch) $('#footer-itch').href = social.itch;
+        else $('#footer-itch').hidden = true;
+
+        var banner = $('#banner');
+        if (site.announcementEnabled && site.announcement && !sessionStorage.getItem('ps2eater.banner.dismissed')) {
+            $('#banner-text').textContent = site.announcement;
+            banner.hidden = false;
+        }
+
+        renderCommunity(site.social || {});
+        renderSeo(site);
+    }
+
+    var SOCIAL = [
+        { key: 'discord', label: 'Discord', sub: 'Join the server', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 5.6A16 16 0 0 0 15.6 4l-.3.6a12 12 0 0 1 3.4 1.7 11.4 11.4 0 0 0-9.4 0A12 12 0 0 1 12.7 4.6L12.4 4A16 16 0 0 0 8.4 5.6C5.9 9.3 5.2 13 5.6 16.6a16 16 0 0 0 4.9 2.5l1-1.6a10.4 10.4 0 0 1-1.6-.8l.4-.3a11.4 11.4 0 0 0 9.4 0l.4.3a10.4 10.4 0 0 1-1.6.8l1 1.6a16 16 0 0 0 4.9-2.5c.5-4.2-.5-7.9-2.8-11zM9.8 14.4c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9zm4.4 0c-1 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.8.9 1.7 1.9c0 1-.8 1.9-1.7 1.9z"/></svg>' },
+        { key: 'telegram', label: 'Telegram', sub: 'Channel updates', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 4.3 2.9 11.6c-.9.3-.9 1.1 0 1.4l4.6 1.4 1.7 5.2c.2.7.6.8 1.1.4l2.5-1.9 4.7 3.4c.6.4 1.1.2 1.3-.6l3.1-14.4c.2-1-.4-1.4-1.2-1.2zM9.6 14.1l8.7-5.4-7.2 6.5-.3 3.1-1.2-4.2z"/></svg>' },
+        { key: 'x', label: 'X', sub: 'Latest posts', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 3h3.3l-7.2 8.2L21.5 21h-6.3l-5-6.1L4.6 21H1.3l7.6-8.7L1 3h6.4l4.6 5.7L17.6 3Zm-1.1 16h1.8L6.9 4.9H5L16.5 19Z"/></svg>' },
+        { key: 'tiktok', label: 'TikTok', sub: 'Short clips', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 2.4 1.8 3.9 4.1 4.1v3c-1.5 0-2.9-.5-4.1-1.3v6.8A5.8 5.8 0 1 1 10.8 10c.3 0 .6 0 .9.1v3.1a2.7 2.7 0 1 0 1.9 2.6V3h3Z"/></svg>' },
+        { key: 'facebook', label: 'Facebook', sub: 'Official page', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.3 21v-7.1h2.5l.4-2.9h-2.9V9.2c0-.8.3-1.4 1.5-1.4h1.5V5.2c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8V11H9v2.9h2.4V21h2.9Z"/></svg>' },
+        { key: 'patreon', label: 'Patreon', sub: 'Support the work', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="16" cy="12" r="8"/><rect x="3" y="4" width="3.4" height="16" rx="0.7"/></svg>' },
+        { key: 'github', label: 'GitHub', sub: 'Source code', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.5.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>' },
+        { key: 'itch', label: 'itch.io', sub: 'Store page', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.1 16.2c.6 1.4 1.3 2.4 2.2 3.1 1 .8 2 1 3 1 .8 0 1.5-.2 2.2-.6.6-.4 1-.7 1.5-.7s.9.3 1.5.7c.7.4 1.4.6 2.2.6 1 0 2-.2 3-1 .9-.7 1.6-1.7 2.2-3.1.7-1.8 1-3.8.8-5.8-.1-1.3-1-2.4-2.3-2.6-1-.2-2 .1-2.8.7l-.9.7a8.6 8.6 0 0 1-.6.4l-1.6-1.3a3.4 3.4 0 0 0-2.1-.8c-.8 0-1.5.3-2.1.8l-1.6 1.3-.6-.4-.9-.7c-.8-.6-1.8-.9-2.8-.7-1.3.2-2.2 1.3-2.3 2.6-.2 2 .1 4 .8 5.8zm4.4-2.9a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm9 0a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zM8.5 17.2c1.6.9 5.4.9 7 0 0 0-1.4 1.6-3.5 1.6s-3.5-1.6-3.5-1.6z"/></svg>' }
+    ];
+
+    function socialLinks(social) {
+        return SOCIAL.filter(function (s) { return social[s.key] && String(social[s.key]).trim(); });
+    }
+
+    function renderCommunity(social) {
+        var available = socialLinks(social || {});
+
+        var tiles = $('#social-tiles');
+        if (tiles) {
+            tiles.innerHTML = available.map(function (s) {
+                return '<a class="social-tile" data-brand="' + s.key + '" href="' + esc(social[s.key]) + '" target="_blank" rel="noopener me">' +
+                    '<span class="social-tile-icon">' + s.icon + '</span>' +
+                    '<span class="social-tile-text"><b>' + esc(s.label) + '</b><small>' + esc(tsub(s.key)) + '</small></span>' +
+                    '<svg class="social-tile-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>' +
+                '</a>';
+            }).join('');
+            var band = document.getElementById('community');
+            if (band) band.hidden = !available.length;
+        }
+
+        var about = $('#social-links');
+        if (about) {
+            about.innerHTML = available.map(function (s) {
+                return '<a class="social-btn" data-brand="' + s.key + '" href="' + esc(social[s.key]) + '" target="_blank" rel="noopener me">' +
+                    s.icon + '<span>' + esc(s.label) + '</span></a>';
+            }).join('');
+        }
+
+        var cta = $('#nav-discord');
+        if (cta) {
+            if (social.discord) { cta.href = social.discord; cta.hidden = false; }
+            else { cta.hidden = true; }
+        }
+        var fab = $('#contact-fab');
+        if (fab) {
+            if (social.discord) { fab.href = social.discord; fab.hidden = false; }
+            else { fab.hidden = true; }
+        }
+        if (social.github) { $('#footer-github').href = social.github; $('#footer-github').hidden = false; }
+        if (social.itch) { $('#footer-itch').href = social.itch; $('#footer-itch').hidden = false; }
+    }
+
+    function renderSeo(site) {
+        var origin = (location.protocol === 'http:' || location.protocol === 'https:') ? location.origin : 'https://ps2eater.github.io';
+        var pageUrl = origin + (location.pathname === '/' ? '/' : location.pathname);
+        var image = origin + '/logo.png';
+        var title = site.title || 'PS2EATER';
+        var description = site.subtitle || site.about || '';
+
+        var canonical = document.getElementById('canonical-url');
+        if (canonical) canonical.href = pageUrl;
+        var ogUrl = document.getElementById('og-url');
+        if (ogUrl) ogUrl.setAttribute('content', pageUrl);
+        var ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage) ogImage.setAttribute('content', image);
+        var twImage = document.getElementById('twitter-image');
+        if (twImage) twImage.setAttribute('content', image);
+        var ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', title + (site.tagline ? ' - ' + site.tagline : ''));
+        var twTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twTitle) twTitle.setAttribute('content', title + (site.tagline ? ' - ' + site.tagline : ''));
+        if (description) {
+            var ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) ogDesc.setAttribute('content', description);
+            var twDesc = document.querySelector('meta[name="twitter:description"]');
+            if (twDesc) twDesc.setAttribute('content', description);
+        }
+
+        var ld = document.getElementById('structured-data');
+        if (ld) ld.textContent = JSON.stringify(buildSchema(site, origin, pageUrl));
+    }
+
+    function buildSchema(site, origin, pageUrl) {
+        var social = site.social || {};
+        var sameAs = socialLinks(social).map(function (s) { return social[s.key]; });
+        var list = [];
+        categories().forEach(function (cat) {
+            itemsOf(cat).forEach(function (item) {
+                list.push({
+                    '@type': 'ListItem',
+                    position: list.length + 1,
+                    name: item.name,
+                    url: String(item.link || '').trim() || (pageUrl + '#' + cat.id)
+                });
+            });
+        });
+
+        var graph = [{
+            '@type': 'WebSite',
+            '@id': pageUrl + '#website',
+            url: pageUrl,
+            name: site.title || 'PS2EATER',
+            description: site.subtitle || '',
+            inLanguage: 'en',
+            publisher: {
+                '@type': 'Organization',
+                name: site.title || 'PS2EATER',
+                url: pageUrl,
+                logo: { '@type': 'ImageObject', url: origin + '/logo.png' },
+                sameAs: sameAs
+            }
+        }];
+        if (list.length) {
+            graph.push({ '@type': 'ItemList', name: 'Catalogue', numberOfItems: list.length, itemListElement: list.slice(0, 50) });
+        }
+        return { '@context': 'https://schema.org', '@graph': graph };
+    }
+
+    function render() {
+        applyI18n();
+        renderSiteChrome();
+        renderNav();
+        renderContent();
+        spy();
+    }
+
+    /* ---------- nav highlighting ---------- */
+    var activeLink = null;
+    function spy() {
+        var sections = Array.prototype.slice.call(document.querySelectorAll('#content .section'));
+        if (!sections.length) return;
+        var fromTop = window.scrollY + 160;
+        var current = null;
+        sections.forEach(function (s) { if (s.offsetTop <= fromTop) current = s.id; });
+        if (!current) current = sections[0].id;
+        document.querySelectorAll('.nav-link').forEach(function (link) {
+            var on = link.getAttribute('href') === '#' + current;
+            if (on && link !== activeLink) {
+                link.classList.add('active');
+                activeLink = link;
+            } else if (!on) {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    /* ---------- events ---------- */
+    var searchEl = $('#search');
+    var debounce;
+    searchEl.addEventListener('input', function () {
+        clearTimeout(debounce);
+        var value = searchEl.value;
+        debounce = setTimeout(function () {
+            VIEW.q = value.trim().toLowerCase();
+            renderContent();
+            spy();
+        }, 120);
+    });
+
+    $('#chips').addEventListener('click', function (e) {
+        var btn = e.target.closest('.chip');
+        if (!btn) return;
+        document.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('active'); });
+        btn.classList.add('active');
+        VIEW.mode = btn.dataset.mode;
+        renderContent();
+        spy();
+    });
+
+    $('#sort').addEventListener('change', function (e) {
+        VIEW.sort = e.target.value;
+        renderContent();
+        spy();
+    });
+
+    $('#reset-filters').addEventListener('click', function () {
+        searchEl.value = '';
+        VIEW.q = '';
+        VIEW.mode = 'all';
+        document.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('active', c.dataset.mode === 'all'); });
+        renderContent();
+    });
+
+    $('#retry').addEventListener('click', function () { load(true); });
+
+    $('#banner-close').addEventListener('click', function () {
+        $('#banner').hidden = true;
+        sessionStorage.setItem('ps2eater.banner.dismissed', '1');
+    });
+
+    document.addEventListener('keydown', function (e) {
+        var tag = (document.activeElement && document.activeElement.tagName) || '';
+        var typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+        if (e.key === '/' && !typing) {
+            e.preventDefault();
+            searchEl.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === searchEl) {
+            searchEl.value = '';
+            VIEW.q = '';
+            renderContent();
+        }
+    });
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { spy(); ticking = false; });
+    }, { passive: true });
+
+    /* ---------- data ---------- */
+    function load(force) {
+        $('#error-state').hidden = true;
+        return fetch('data.json?v=' + Date.now(), { cache: 'no-store' })
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status + ' while loading data.json');
+                return res.json();
+            })
+            .then(function (data) {
+                DATA = data || {};
+                render();
+            })
+            .catch(function (err) {
+                $('#content').innerHTML = '';
+                $('#empty-state').hidden = true;
+                $('#error-state').hidden = false;
+                $('#error-detail').textContent = 'data.json could not be fetched (' + err.message + '). ' +
+                    (location.protocol === 'file:' ? 'Serve the folder over HTTP instead of opening the file directly.' : 'Check that data.json exists in the repository root.');
+            });
+    }
+
+    /* ---------- preferences ---------- */
+    function setupPreferences() {
+        var storedTheme = 'dark';
+        var storedLang = 'en';
+        try {
+            storedTheme = localStorage.getItem('ps2eater.theme') === 'light' ? 'light' : 'dark';
+            storedLang = localStorage.getItem('ps2eater.lang') || 'en';
+        } catch (e) { /* storage blocked */ }
+
+        applyTheme(storedTheme);
+        applyLang(I18N[storedLang] ? storedLang : 'en');
+
+        var themeBtn = $('#theme-toggle');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', function () {
+                applyTheme(THEME === 'light' ? 'dark' : 'light');
+                themeBtn.setAttribute('aria-label', THEME === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+            });
+            themeBtn.setAttribute('aria-label', THEME === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+        }
+
+        var langSel = $('#lang-select');
+        if (langSel) {
+            langSel.value = LANG;
+            langSel.addEventListener('change', function () { applyLang(langSel.value); });
+        }
+
+        var fab = $('#contact-fab');
+        if (fab) fab.addEventListener('click', openDiscordPopup);
+    }
+
+    setupPreferences();
+    load(false);
+})();
+</script>
+</body>
+</html>
+
