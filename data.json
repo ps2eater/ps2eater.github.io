@@ -162,7 +162,7 @@
       "price": "free",
       "link": "https://www.patreon.com/posts/roxanne-perez-26-173591157",
       "image": "https://c10.patreonusercontent.com/4/patreon-media/p/post/173591157/033499f9a34640c093be46c2bf5ecd85/eyJ3IjoxMDgwfQ%3D%3D/1.png?token-hash=OTStUlVmb64hsFZBtc41UxZI-LM-_4sONGo6bdArNLw%3D&token-time=1794787200",
-      "featured": false,
+      "featured": true,
       "hidden": false,
       "updated": "2026-11-01"
     }
@@ -178,15 +178,15 @@
         "Custom character",
         "Multi-game compatible"
       ],
-      "price": "$15",
-      "link": "https://amheroher.itch.io/royce-keys",
-      "image": "https://img.itch.zone/aW1nLzMxMjEzOTU1LnBuZw==/original/zhcska.png",
-      "featured": true,
-      "hidden": false,
       "tags": [
         "Character"
       ],
-      "updated": "2026-10-30"
+      "price": "$15",
+      "link": "https://amheroher.itch.io/royce-keys",
+      "image": "https://img.itch.zone/aW1nLzMxNjEzOTU1LnBuZw==/original/zhcska.png",
+      "featured": true,
+      "hidden": false,
+      "updated": "2026-11-01"
     }
   ],
   "movepacks": [
