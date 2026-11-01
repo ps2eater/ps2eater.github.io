@@ -99,6 +99,10 @@
       </button>
 
       <div class="nav-section">Site</div>
+      <button class="nav-item" data-view="sections">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15l3 3-3 3"/></svg>
+        <span class="grow">Sections &amp; order</span>
+      </button>
       <button class="nav-item" data-view="site">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg>
         <span class="grow">Site settings</span>
@@ -188,6 +192,22 @@
           </div>
         </div>
         <div id="site-root"></div>
+      </section>
+
+      <section class="view" id="view-sections" hidden>
+        <div class="view-head">
+          <div>
+            <h1>Sections &amp; order</h1>
+            <p>Drag a section to move it, or use the arrows. The first section shows first on the public page.</p>
+          </div>
+          <div class="view-actions">
+            <button class="btn btn-primary" id="btn-sections-add">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              Add section
+            </button>
+          </div>
+        </div>
+        <div id="sections-root"></div>
       </section>
 
       <section class="view" id="view-history" hidden>

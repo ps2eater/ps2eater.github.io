@@ -262,7 +262,7 @@
       social: { discord: '', github: '', itch: '' }
     }, data.site || {});
     data.site.social = Object.assign({
-      discord: '', patreon: '', facebook: '', telegram: '', tiktok: '', x: '', github: '', itch: ''
+      discord: '', discordDm: '', patreon: '', facebook: '', telegram: '', tiktok: '', x: '', github: '', itch: ''
     }, data.site.social || {});
 
     if (!Array.isArray(data.categories) || !data.categories.length) {
@@ -589,7 +589,7 @@
   }
 
   var VIEW_TITLES = {
-    overview: 'Overview', history: 'History', site: 'Site settings',
+    overview: 'Overview', history: 'History', site: 'Site settings', sections: 'Sections & order',
     connection: 'Connection', help: 'Help'
   };
 
@@ -611,6 +611,9 @@
     } else if (S.view === 'site') {
       qs('#view-site').hidden = false;
       renderSite();
+    } else if (S.view === 'sections') {
+      qs('#view-sections').hidden = false;
+      renderSections();
     } else if (S.view === 'history') {
       qs('#view-history').hidden = false;
       renderHistory();
@@ -916,6 +919,8 @@
     copy: '<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
     trash: '<path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
+    top: '<path d="M12 19V5"/><path d="m6 11 6-6 6 6"/>',
+    drag: '<path d="M8 6h.01M8 12h.01M8 18h.01M16 6h.01M16 12h.01M16 18h.01" stroke-width="3"/>',
     link: '<path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/>',
     check: '<path d="m5 13 4 4L19 7"/>'
   };
@@ -924,6 +929,70 @@
   }
 
   /* ---------------------------------------------------------- site settings */
+
+  function renderSections() {
+    var host = qs('#sections-root');
+    if (!host) return;
+    var list = cats();
+
+    if (!list.length) {
+      host.innerHTML = '<div class="card"><div class="empty"><b>No sections yet</b>Add one and it appears on the site.</div></div>';
+      return;
+    }
+
+    host.innerHTML =
+      '<div class="banner-strip" style="margin-bottom:14px">' + icon('drag') +
+        '<span>Drag a card to reorder, or use the arrows. Position <b>1</b> is the first section on the public site.</span></div>' +
+      list.map(function (cat, i) {
+        var count = items(cat.id).length;
+        return '<div class="section-row" data-cat-row="' + esc(cat.id) + '" draggable="true">' +
+          '<div class="section-row-head">' +
+            '<span class="section-pos">' + (i + 1) + '</span>' +
+            '<span class="section-grip" title="Drag to reorder">' + icon('drag') + '</span>' +
+            '<div class="section-name"><b>' + esc(cat.nav || cat.id) + '</b>' +
+              '<span>' + count + ' item' + (count === 1 ? '' : 's') + ' &middot; #' + esc(cat.id) + '</span></div>' +
+            '<div class="row">' +
+              '<button class="btn-icon" data-top="' + esc(cat.id) + '" title="Move to top" ' + (i === 0 ? 'disabled' : '') + '>' + icon('top') + '</button>' +
+              '<button class="btn-icon" data-order="' + esc(cat.id) + '" data-dir="-1" title="Move up" ' + (i === 0 ? 'disabled' : '') + '>' + icon('up') + '</button>' +
+              '<button class="btn-icon" data-order="' + esc(cat.id) + '" data-dir="1" title="Move down" ' + (i === list.length - 1 ? 'disabled' : '') + '>' + icon('down') + '</button>' +
+              '<button class="btn btn-sm" data-go="' + esc(cat.id) + '">Items</button>' +
+              '<button class="btn-icon danger" data-cat-action="delete" data-cat-id="' + esc(cat.id) + '" title="Delete section">' + icon('trash') + '</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="form-row">' +
+            '<div class="field"><label>Name in the nav</label>' +
+              '<input class="input" data-cat="' + esc(cat.id) + '" data-catfield="nav" value="' + esc(cat.nav) + '" maxlength="40"></div>' +
+            '<div class="field"><label>Heading on the page</label>' +
+              '<input class="input" data-cat="' + esc(cat.id) + '" data-catfield="title" value="' + esc(cat.title) + '" maxlength="60"></div>' +
+          '</div>' +
+          '<div class="field" style="margin-top:10px"><label>Short description</label>' +
+            '<input class="input" data-cat="' + esc(cat.id) + '" data-catfield="blurb" value="' + esc(cat.blurb || '') + '" maxlength="140"></div>' +
+        '</div>';
+      }).join('') +
+      '<div class="muted" style="font-size:12px">Renaming saves to your draft right away. Press Publish to show it on the site.</div>';
+  }
+
+  function moveCategoryTo(catId, index) {
+    var list = cats();
+    var from = list.findIndex(function (c) { return c.id === catId; });
+    if (from < 0) return;
+    var moved = list.splice(from, 1)[0];
+    if (!moved) return;
+    list.splice(Math.max(0, Math.min(index, list.length)), 0, moved);
+    list.forEach(function (cat, i) { cat.order = i + 1; });
+    refreshSectionViews();
+  }
+
+  function moveCategoryToTop(catId) {
+    moveCategoryTo(catId, 0);
+  }
+
+  function refreshSectionViews() {
+    renderContentNav();
+    if (S.view === 'sections') renderSections();
+    if (S.view === 'site') renderSite();
+    updateDirtyPill();
+  }
 
   function setPath(obj, path, value) {
     var parts = path.split('.');
@@ -985,6 +1054,9 @@
           '<div class="card">' +
             '<div class="card-head"><div><div class="card-title">Social links</div><div class="card-sub">Empty fields are hidden on the site</div></div></div>' +
             socialInput('discord', 'Discord invite', 'https://discord.gg/...') +
+            '<div class="field" style="margin-top:10px"><label>Discord user ID (contact button)</label>' +
+              '<input class="input" data-field="site.social.discordDm" value="' + esc(social.discordDm || '') + '" placeholder="e.g. 123456789012345678" spellcheck="false">' +
+              '<span class="hint">Discord &rarr; Settings &rarr; Advanced &rarr; Developer Mode, then right-click your name &rarr; Copy User ID. The floating contact button opens a direct chat with this account.</span></div>' +
             socialInput('telegram', 'Telegram channel', 'https://t.me/ps2eater') +
             socialInput('x', 'X (Twitter)', 'https://x.com/...') +
             socialInput('tiktok', 'TikTok', 'https://www.tiktok.com/@...') +
@@ -1875,6 +1947,59 @@
       moveCategory(btn.getAttribute('data-order'), Number(btn.getAttribute('data-dir')));
     });
 
+    qs('#btn-sections-add').addEventListener('click', addSectionDialog);
+
+    qs('#sections-root').addEventListener('input', function (e) {
+      onSiteField(e);
+      var catId = e.target.getAttribute('data-cat');
+      if (!catId || e.target.getAttribute('data-catfield') !== 'nav') return;
+      var row = e.target.closest('[data-cat-row]');
+      var label = row && row.querySelector('.section-name b');
+      if (label) label.textContent = e.target.value || catId;
+    });
+
+    qs('#sections-root').addEventListener('click', function (e) {
+      var top = e.target.closest('[data-top]');
+      if (top) { moveCategoryToTop(top.getAttribute('data-top')); return; }
+      var del = e.target.closest('[data-cat-action="delete"]');
+      if (del) { deleteSection(del.getAttribute('data-cat-id')); return; }
+      var order = e.target.closest('[data-order]');
+      if (order) { moveCategory(order.getAttribute('data-order'), Number(order.getAttribute('data-dir'))); }
+    });
+
+    var sectionsRoot = qs('#sections-root');
+    var dragCatId = null;
+    sectionsRoot.addEventListener('dragstart', function (e) {
+      var row = e.target.closest('[data-cat-row]');
+      if (!row) return;
+      dragCatId = row.getAttribute('data-cat-row');
+      row.classList.add('dragging');
+      if (e.dataTransfer) {
+        e.dataTransfer.effectAllowed = 'move';
+        try { e.dataTransfer.setData('text/plain', dragCatId); } catch (err) { /* ignore */ }
+      }
+    });
+    sectionsRoot.addEventListener('dragover', function (e) {
+      var row = e.target.closest('[data-cat-row]');
+      if (!row || !dragCatId) return;
+      e.preventDefault();
+      qsa('.section-row', sectionsRoot).forEach(function (r) { r.classList.remove('drop-target'); });
+      if (row.getAttribute('data-cat-row') !== dragCatId) row.classList.add('drop-target');
+    });
+    sectionsRoot.addEventListener('drop', function (e) {
+      var row = e.target.closest('[data-cat-row]');
+      if (!row || !dragCatId) return;
+      e.preventDefault();
+      var targetId = row.getAttribute('data-cat-row');
+      var index = cats().findIndex(function (c) { return c.id === targetId; });
+      if (index >= 0) moveCategoryTo(dragCatId, index);
+      dragCatId = null;
+    });
+    sectionsRoot.addEventListener('dragend', function () {
+      dragCatId = null;
+      qsa('.section-row', sectionsRoot).forEach(function (r) { r.classList.remove('dragging', 'drop-target'); });
+    });
+
     qs('#history-root').addEventListener('click', function (e) {
       var restore = e.target.closest('[data-restore]');
       if (restore) restoreCommit(restore.getAttribute('data-restore'));
@@ -2022,15 +2147,8 @@
   function moveCategory(catId, direction) {
     var list = cats();
     var index = list.findIndex(function (c) { return c.id === catId; });
-    var target = index + direction;
-    if (index < 0 || target < 0 || target >= list.length) return;
-    var swapped = list[index];
-    list[index] = list[target];
-    list[target] = swapped;
-    list.forEach(function (cat, i) { cat.order = i + 1; });
-    renderSite();
-    renderContentNav();
-    updateDirtyPill();
+    if (index < 0) return;
+    moveCategoryTo(catId, index + direction);
   }
 
   function sectionId(name) {
@@ -2091,7 +2209,7 @@
     if (!Array.isArray(S.data[id])) S.data[id] = [];
     closeModal();
     renderContentNav();
-    if (S.view === 'site') renderAll();
+    if (S.view === 'site' || S.view === 'sections') renderAll();
     else setView(id);
     toast('Section created', 'ok', '"' + name + '" is a draft until you publish.');
   }

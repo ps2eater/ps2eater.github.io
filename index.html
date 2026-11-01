@@ -54,8 +54,8 @@
     <div class="hero-content">
         <img src="logo.png" alt="PS2EATER" class="hero-logo" width="132" height="132">
         <h1 id="hero-title">PS2EATER</h1>
-        <p class="tagline" id="hero-tagline">SVR Mods, Characters &amp; Upgrades</p>
-        <p class="subtitle" id="hero-subtitle">Custom superstars, fresh move sets and gameplay upgrades for WWE SmackDown vs. RAW on PlayStation 2.</p>
+        <p class="tagline" id="hero-tagline" dir="auto">SVR Mods, Characters &amp; Upgrades</p>
+        <p class="subtitle" id="hero-subtitle" dir="auto">Custom superstars, fresh move sets and gameplay upgrades for WWE SmackDown vs. RAW on PlayStation 2.</p>
     </div>
 </header>
 
@@ -149,7 +149,7 @@
     <section class="section about-section" id="about">
         <div class="about-box">
             <h2><span data-i18n="about">About</span> <span id="about-name">PS2EATER</span></h2>
-            <p id="about-text">Building tools and mods for the WWE SmackDown vs. RAW series on PlayStation 2. Every tool is free and built for the community.</p>
+            <p id="about-text" dir="auto">Building tools and mods for the WWE SmackDown vs. RAW series on PlayStation 2. Every tool is free and built for the community.</p>
             <div class="social-links" id="social-links"></div>
         </div>
     </section>
@@ -460,10 +460,10 @@
 
             html += '<section class="section" id="' + esc(cat.id) + '">' +
                 '<div class="section-head">' +
-                    '<h2 class="section-title">' + esc(cat.title || cat.nav) +
+                    '<h2 class="section-title" dir="auto">' + esc(cat.title || cat.nav) +
                         '<span class="section-count">' + list.length + (list.length === all.length ? '' : ' / ' + all.length) + '</span>' +
                     '</h2>' +
-                    (cat.blurb ? '<p class="section-blurb">' + esc(cat.blurb) + '</p>' : '') +
+                    (cat.blurb ? '<p class="section-blurb" dir="auto">' + esc(cat.blurb) + '</p>' : '') +
                 '</div>' +
                 '<div class="grid">' + list.map(function (item) { return cardHTML(item, cat); }).join('') + '</div>' +
             '</section>';
@@ -576,7 +576,10 @@
         }
         var fab = $('#contact-fab');
         if (fab) {
-            if (social.discord) { fab.href = social.discord; fab.hidden = false; }
+            var dmId = String(social.discordDm || '').replace(/[^0-9]/g, '');
+            var invite = String(social.discord || '').trim();
+            if (dmId) { fab.href = 'https://discord.com/users/' + dmId; fab.hidden = false; }
+            else if (invite) { fab.href = invite; fab.hidden = false; }
             else { fab.hidden = true; }
         }
         if (social.github) { $('#footer-github').href = social.github; $('#footer-github').hidden = false; }

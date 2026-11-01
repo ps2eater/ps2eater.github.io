@@ -645,8 +645,8 @@ html[data-theme="light"] .nav-icon .ico-moon { display: none; }
 
 /* ============ FLOATING CONTACT ============ */
 .contact-fab {
-    position: fixed; right: 14px; top: 50%; z-index: 95;
-    transform: translateY(-50%);
+    position: fixed; right: 14px; top: 76px; z-index: 110;
+    transform: none;
     display: inline-flex; align-items: center; gap: 9px;
     padding: 7px 13px 7px 7px;
     border-radius: 999px;
@@ -666,7 +666,7 @@ html[data-theme="light"] .nav-icon .ico-moon { display: none; }
 .contact-fab-text { white-space: nowrap; }
 .contact-fab-text b { font-weight: 800; letter-spacing: 0.06em; }
 .contact-fab:hover {
-    transform: translateY(-50%) translateX(-2px);
+    transform: translateX(-2px);
     box-shadow: 0 16px 36px rgba(88, 101, 242, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.16);
 }
 
@@ -740,7 +740,7 @@ html[data-theme="light"] .lang-wrap:hover { background: rgba(154, 116, 24, 0.08)
 @media (max-width: 768px) {
     .hero { padding: 48px 18px 40px; }
     .contact-fab {
-        top: auto; bottom: 16px; right: 50%;
+        top: 68px; bottom: auto; right: 50%;
         transform: translateX(50%);
         padding: 6px 12px 6px 6px;
         font-size: 0.7rem;
