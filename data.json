@@ -9,6 +9,7 @@
     "footer": "© 2026 PS2EATER. All rights reserved.",
     "social": {
       "discord": "https://discord.gg/BvmDS3NWrB",
+      "discordDm": "",
       "patreon": "https://www.patreon.com/PS2EATER",
       "facebook": "https://www.facebook.com/PS2EATER",
       "telegram": "https://t.me/ps2eater",
@@ -21,24 +22,24 @@
   },
   "categories": [
     {
-      "id": "tools",
-      "nav": "Tools",
-      "title": "Modding Tools",
-      "blurb": "Editors, converters and utilities for SVR 2006–2011.",
-      "order": 1
-    },
-    {
       "id": "characters",
       "nav": "Characters",
       "title": "Custom Characters",
       "blurb": "Hand-built superstars, ready to drop into your roster.",
-      "order": 2
+      "order": 1
     },
     {
       "id": "movepacks",
       "nav": "Move Packs",
       "title": "Move Packs",
       "blurb": "Move sets ported and tuned between SVR titles.",
+      "order": 2
+    },
+    {
+      "id": "tools",
+      "nav": "Tools",
+      "title": "Modding Tools",
+      "blurb": "Editors, converters and utilities for SVR 2006–2011.",
       "order": 3
     }
   ],
