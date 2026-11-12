@@ -153,6 +153,27 @@
       "featured": true,
       "hidden": false,
       "updated": "2026-11-05"
+    },
+    {
+      "id": "sebastian-rumble-roses-clown",
+      "name": "Sebastian RUMBLE ROSES CLOWN",
+      "version": "",
+      "icon": "👹",
+      "description": "Sebastian RUMBLE ROSES CLOWN \nPORTED TO SVR 2006 TILL 2011 PS2 BY ME!",
+      "features": [],
+      "tags": [
+        "WWE",
+        "SVR",
+        "RR",
+        "RUMBLE",
+        "ROSES"
+      ],
+      "price": "free",
+      "link": "https://sharemods.com/xlmog6329fql/Clown__male___-__Attire_1.rar.html",
+      "image": "assets/rr-clown-male-ps2eater-mwdv7m7b.png",
+      "featured": true,
+      "hidden": false,
+      "updated": "2026-11-12"
     }
   ],
   "movepacks": []
